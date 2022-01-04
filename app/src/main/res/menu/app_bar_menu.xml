@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menuHomeIcon"
+        android:title="appHome"
+        android:icon="@drawable/home"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/chatIcon"
+        android:title="appChat"
+        android:icon="@drawable/chat_icon"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/subscribeIcon"
+        android:title="appSubscribe"
+        android:icon="@drawable/subscribe_icon"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/profileIcon"
+        android:title="appProfile"
+        android:icon="@drawable/profile_icon"
+        app:showAsAction=""/>
+</menu>
