@@ -24,35 +24,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS user");
     }
 
-    public boolean Insert(String username, String password){
+    public boolean Insert(String username, String password) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
         contentValues.put("password", password);
         long result = sqLiteDatabase.insert("user", null, contentValues);
-        if(result == -1){
+        if (result == -1) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
-    public Boolean CheckUsername(String username){
+    public Boolean CheckUsername(String username) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM user WHERE username=?", new String[]{username});
-        if(cursor.getCount() > 0){
+        if (cursor.getCount() > 0) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
-    public Boolean CheckLogin(String username, String password){
+    public Boolean CheckLogin(String username, String password) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM user WHERE username=? AND password=?", new String[]{username, password});
-        if(cursor.getCount() > 0){
+        if (cursor.getCount() > 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

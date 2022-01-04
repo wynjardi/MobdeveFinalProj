@@ -30,7 +30,7 @@ class Login : AppCompatActivity() {
         btn_llogin!!.setOnClickListener {
             val username = et_lusername!!.text.toString()
             val password = et_lpassword!!.text.toString()
-            val checklogin: Boolean = databaseHelper.CheckLogin(username, password)
+            val checklogin: Boolean = databaseHelper!!.CheckLogin(username, password)
             if (checklogin == true) {
                 Toast.makeText(applicationContext, "Login Successful", Toast.LENGTH_SHORT).show()
             } else {
