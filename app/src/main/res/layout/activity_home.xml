@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity"
+    android:orientation="vertical"
+    android:background="#b0c4de">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/ouricon"
+        android:layout_height="250dp"
+        android:scaleType="centerInside"
+        android:layout_marginTop="90dp"
+        android:layout_marginBottom="30dp"/>
+
+    <Button
+        android:backgroundTint="#536895"
+        android:textSize="20sp"
+        android:id="@+id/btnReg"
+        android:text="Register"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:layout_width="350dp"
+        android:layout_height="60sp"
+        android:layout_gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:backgroundTint="#536895"
+        android:textSize="20sp"
+        android:id="@+id/btnLogIn"
+        android:text="LogIn"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:layout_width="350dp"
+        android:layout_height="60sp"
+        android:layout_gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+</LinearLayout>
