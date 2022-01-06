@@ -4,22 +4,22 @@
 
     <item
         android:id="@+id/menuHomeIcon"
-        android:title="appHome"
+        android:title="Home"
         android:icon="@drawable/home"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/chatIcon"
-        android:title="appChat"
+        android:title="Chat"
         android:icon="@drawable/chat_icon"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/subscribeIcon"
-        android:title="appSubscribe"
+        android:title="Subscribe"
         android:icon="@drawable/subscribe_icon"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/profileIcon"
-        android:title="appProfile"
+        android:title="Profile"
         android:icon="@drawable/profile_icon"
         app:showAsAction=""/>
 </menu>
