@@ -12,13 +12,13 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="20dp"
-            android:textSize="35dp"
+            android:textSize="35sp"
             android:text="Concerts"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/concert_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="835dp"
         />
 
 
@@ -26,7 +26,6 @@
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         app:backgroundTint="@color/colorPrimary"
         app:menu="@menu/app_bar_menu"
