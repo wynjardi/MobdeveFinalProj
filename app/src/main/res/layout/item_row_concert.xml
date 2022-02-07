@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="600dp"
+    android:orientation="vertical"
+    android:layout_margin="4dp"
+    android:padding="4dp"
+>
+
+
+        <ImageView
+            android:id="@+id/concert_img"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+
+             />
+    <LinearLayout
+        android:layout_marginLeft="50dp"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+        android:layout_weight="5"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/concert_name"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            />
+
+        <TextView
+            android:id="@+id/concert_artist_name"
+
+            android:textSize="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            />
+        <TextView
+            android:id="@+id/concert_date"
+
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            />
+        <Button
+            android:id="@+id/btn_concert_subscribe"
+            android:textSize="15dp"
+            android:text="SUBSCRIBE"
+            android:layout_width="150dp"
+            android:layout_height="50dp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

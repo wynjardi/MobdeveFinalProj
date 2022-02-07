@@ -6,20 +6,20 @@
         android:id="@+id/menuHomeIcon"
         android:title="Home"
         android:icon="@drawable/home"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
     <item
         android:id="@+id/chatIcon"
         android:title="Chat"
         android:icon="@drawable/chat_icon"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
     <item
         android:id="@+id/subscribeIcon"
         android:title="Subscribe"
         android:icon="@drawable/subscribe_icon"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
     <item
         android:id="@+id/profileIcon"
         android:title="Profile"
         android:icon="@drawable/profile_icon"
-        app:showAsAction=""/>
+        app:showAsAction="always"/>
 </menu>
