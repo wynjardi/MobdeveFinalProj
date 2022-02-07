@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".ConcertDetailsActivity">
+
+    <Button
+        android:id="@+id/backbutton"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:text="<-"/>
+
+    <ImageView
+        android:id="@+id/concert_img"
+        android:src="@drawable/harry_styles_picture"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:text="Total prices are as follows:"
+        android:textSize="15dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="60dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Love on Tour"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Harry Styles"
+        android:textSize="25dp"
+        android:layout_marginLeft="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="November 20, 2021, 8PM to 11PM"
+        android:textSize="15dp"
+        android:layout_marginLeft="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mall of Asia Arena, Pasay City"
+        android:textSize="15dp"
+        android:layout_marginLeft="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total prices are as follows:"
+        android:textSize="15dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="60dp"/>
+
+    <Button
+        android:id="@+id/btn_concert_subscribe"
+        android:textSize="15dp"
+        android:text="SUBSCRIBE"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        />
+
+</LinearLayout>

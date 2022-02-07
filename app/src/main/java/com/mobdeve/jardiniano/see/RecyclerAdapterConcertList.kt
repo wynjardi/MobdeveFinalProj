@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class RecyclerAdapterConcertList (
+class  RecyclerAdapterConcertList (
 ) : RecyclerView.Adapter<RecyclerAdapterConcertList.SimpleViewHolder>() {
 
     private var concertImagesTitles = arrayOf(R.drawable.harry_styles_picture, R.drawable.billie_eilish_picture,R.drawable.taylor_swift_picture)

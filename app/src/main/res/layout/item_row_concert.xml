@@ -14,9 +14,8 @@
             android:layout_gravity="center"
             android:layout_margin="20dp"
             android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_height="300dp" />
 
-             />
     <LinearLayout
         android:layout_marginLeft="50dp"
         android:layout_width="300dp"
