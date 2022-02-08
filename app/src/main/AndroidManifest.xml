@@ -9,14 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MobdeveFinalProject">
-        <activity
-            android:name=".ConcertDetailsActivity"
-            android:exported="false" />
+
         <activity
             android:name=".Login"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConcertDetailsHarryActivity"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
