@@ -13,7 +13,7 @@ class ConcertDetailsTaylorActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_concert_details_harry)
+        setContentView(R.layout.activity_concert_details_taylor)
 
         binding!!.backButton.setOnClickListener {
             startActivity(

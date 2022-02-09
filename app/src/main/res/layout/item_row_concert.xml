@@ -45,17 +45,12 @@
             android:layout_height="30dp"
             />
         <Button
-            android:id="@+id/btn_concert_view"
-            android:textSize="15dp"
-            android:text="VIEW"
-            android:layout_width="150dp"
-            android:layout_height="50dp"/>
-        <Button
             android:id="@+id/btn_concert_subscribe"
             android:textSize="15dp"
             android:text="SUBSCRIBE"
             android:layout_width="150dp"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp"
+            android:focusable="false"/>
 
 
     </LinearLayout>
