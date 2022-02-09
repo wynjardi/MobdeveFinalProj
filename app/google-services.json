@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "729847831244",
+    "project_id": "mobdevemp-7b25e",
+    "storage_bucket": "mobdevemp-7b25e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729847831244:android:a1e73da1a63f3cfa174069",
+        "android_client_info": {
+          "package_name": "com.mobdeve.jardiniano.see"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "729847831244-ldekaddp8efqqam1n6hbou7nd7edo1nu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mobdeve.jardiniano.see",
+            "certificate_hash": "d423b8fb29939cd10cf543e58d2064a189f700c2"
+          }
+        },
+        {
+          "client_id": "729847831244-cfuoo95mm1288gppq4uppeng7o8gico3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2t3vGHn_kODU6lh3JwK7CUiV9yYKgfT8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "729847831244-cfuoo95mm1288gppq4uppeng7o8gico3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
