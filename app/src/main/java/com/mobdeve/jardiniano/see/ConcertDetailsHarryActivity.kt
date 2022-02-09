@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 import com.mobdeve.jardiniano.see.databinding.ActivityConcertDetailsHarryBinding
+import com.mobdeve.jardiniano.see.databinding.ActivityHomeBinding
 
 class ConcertDetailsHarryActivity : AppCompatActivity() {
 
@@ -12,7 +13,8 @@ class ConcertDetailsHarryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_concert_details_harry)
+        binding = ActivityConcertDetailsHarryBinding.inflate(layoutInflater)
+//        setContentView(R.layout.activity_concert_details_harry)
         setContentView(binding!!.root)
 
 //        getIntent().getStringExtra("Concert Picture")?.let { binding!!.concertImgDetails.setImageResource(it.toInt()) }
@@ -25,6 +27,10 @@ class ConcertDetailsHarryActivity : AppCompatActivity() {
                     MainActivity::class.java
                 )
             )
+
+        }
+
+        binding!!.btnConcertSubscribe.setOnClickListener{
 
         }
     }

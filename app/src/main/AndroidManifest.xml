@@ -27,6 +27,12 @@
             android:name=".ConcertDetailsHarryActivity"
             android:exported="false" />
         <activity
+            android:name=".ConcertDetailsBillieActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConcertDetailsTaylorActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>

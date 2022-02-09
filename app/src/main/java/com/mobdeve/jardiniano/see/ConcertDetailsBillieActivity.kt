@@ -13,7 +13,9 @@ class ConcertDetailsBillieActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_concert_details_billie)
+        binding = ActivityConcertDetailsBillieBinding.inflate(layoutInflater)
+//        setContentView(R.layout.activity_concert_details_harry)
+        setContentView(binding!!.root)
 
         binding!!.backButton.setOnClickListener {
             startActivity(

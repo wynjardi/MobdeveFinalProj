@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fearless Tour"
-        android:textSize="30dp"
+        android:textSize="40dp"
         android:textStyle="bold"
         android:layout_marginLeft="50dp"/>
 
@@ -40,28 +40,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Taylor Swift"
-        android:textSize="25dp"
+        android:textSize="30dp"
         android:layout_marginLeft="50dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="March 16, 2020, 8PM to 11PM"
-        android:textSize="15dp"
+        android:textSize="20dp"
         android:layout_marginLeft="50dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mall of Asia Arena, Pasay City"
-        android:textSize="15dp"
+        android:text="Kia Theatre, Quezon City"
+        android:textSize="20dp"
         android:layout_marginLeft="50dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total prices are as follows:"
-        android:textSize="15dp"
+        android:textSize="20dp"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="60dp"/>
 
@@ -69,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="P20,000 P10,000 P5,000"
-        android:textSize="15dp"
+        android:textSize="20dp"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="10dp"/>
 
