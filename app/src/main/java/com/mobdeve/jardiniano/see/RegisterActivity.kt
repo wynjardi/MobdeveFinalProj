@@ -1,152 +1,117 @@
 package com.mobdeve.jardiniano.see
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Patterns
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.ActionBar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.mobdeve.jardiniano.see.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
-    private lateinit var et_remail: EditText
-    private lateinit var et_rusername: EditText
-    private lateinit var et_rpw: EditText
-    private lateinit var btnRegister: Button
-    private lateinit var textLogin: TextView
-    private lateinit var progressRegister: ProgressBar
+
+    //ViewBinding
+    private lateinit var binding: ActivityRegisterBinding
+
+    //ActionBar
+    private lateinit var actionBar: ActionBar
+
+    //ProgressDialog
+    private lateinit var progressDialog: ProgressDialog
 
     // Firebase
-    private lateinit var mAuth: FirebaseAuth
-    private lateinit var reference: DatabaseReference
+    private lateinit var firebaseAuth: FirebaseAuth
+    private var email = ""
+    private var password = ""
     private lateinit var database: FirebaseDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        this.initComponents()
-        this.initFirebase()
+        //Configure ActionBar // enable back button
+        actionBar = supportActionBar!!
+        actionBar.title = "Register"
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar.setDisplayShowHomeEnabled(true)
+
+        //configure progress dialog
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Please Wait")
+        progressDialog.setMessage("Signing in...")
+        progressDialog.setCanceledOnTouchOutside(false)
+
+        //init firebase auth
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        //handle click, begin regis
+        binding.btnRegister.setOnClickListener{
+            //validate data
+            validateData()
+        }
     }
 
-    private fun initFirebase() {
-        this.mAuth = FirebaseAuth.getInstance()
-        this.database = FirebaseDatabase.getInstance()
-        this.reference = FirebaseDatabase.getInstance().getReference(Keys.USERS.name)
+    private fun validateData() {
+        //get data
+        email = binding.etLemail.text.toString().trim()
+        password = binding.etLpassword.text.toString().trim()
+
+        //validate data
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            //invalid email format
+            binding.etLemail.error="Invalid email format"
+        }
+        else if (TextUtils.isEmpty(password)){
+            //password not entered
+            binding.etLpassword.error="Please enter a password"
+        }
+        else if (password.length<6){
+            //password length is less than 6
+            binding.etLpassword.error = "Password needs more than 5 characters"
+        }
+        else{
+            //data is valid, continue reg process
+            firebaseRegister()
+        }
+
     }
 
-    private fun initComponents() {
-        this.et_remail = findViewById(R.id.et_remail)
-        this.et_rusername = findViewById(R.id.et_rusername)
-        this.et_rpw = findViewById(R.id.et_rpw)
-        this.btnRegister = findViewById(R.id.btn_register)
-        this.textLogin = findViewById(R.id.tv_register_login)
-        this.progressRegister = findViewById(R.id.pb_register)
+    private fun firebaseRegister() {
+        //show progress
+        progressDialog.show()
 
-        this.btnRegister.setOnClickListener {
-            var email: String = et_remail.text.toString().trim()
-            var name: String = et_rusername.text.toString().trim()
-            var password: String = et_rpw.text.toString().trim()
+        //create account
+        firebaseAuth.createUserWithEmailAndPassword(email,password)
+            .addOnSuccessListener {
+                //reg success
+                progressDialog.dismiss()
+                //get current user
+                val firebaseUser = firebaseAuth.currentUser
+                val email = firebaseUser!!.email
+                Toast.makeText(this,"You successfully registered with $email!",Toast.LENGTH_SHORT).show()
 
-            if(!checkEmpty(email, name, password)) {
-                // add new user to db
-                var user = User(email, name, password);
-                storeUser(user)
+                //open profile
+                startActivity(Intent(this, ProfileActivity::class.java))
+                finish()
             }
-        }
 
-        this.textLogin.setOnClickListener {
-            val loginIntent = Intent(this, MainActivity::class.java)
-            startActivity(loginIntent)
-            finish()
-        }
-    }
+            .addOnFailureListener{e->
+                //reg failed
+                progressDialog.dismiss()
+                Toast.makeText(this, "Register failed due to ${e.message}",Toast.LENGTH_SHORT).show()
 
-    // checks if there are fields that are empty. returns true if there is an empty field and false if none
-    private fun checkEmpty(email: String, name: String, password: String): Boolean {
-        var hasEmpty: Boolean = false;
-
-        // if email field is empty, prompt user to input email
-        if(email.isEmpty()) {
-            this.et_remail.error = "Required field"
-            this.et_remail.requestFocus()
-            hasEmpty = true
-        }
-
-        // if display name is empty, prompt user to input name
-        if(name.isEmpty()) {
-            this.et_rusername.error = "Required field"
-            this.et_rusername.requestFocus()
-            hasEmpty = true
-        }
-
-        // if password is empty, prompt user to input password
-        if(password.isEmpty()) {
-            this.et_rpw.error = "Required field"
-            this.et_rpw.requestFocus()
-            hasEmpty = true
-        }
-
-        // if email is invalid, prompt user to input a valid email
-        if(!isValidEmail(et_remail.text.trim().toString())) {
-            this.et_remail.error = "Please enter a valid e-mail address!"
-            this.et_rusername.requestFocus()
-            hasEmpty = true
-        }
-
-        // if password is less than 8 characters long, prompt user to input valid password
-        if(password.length < 8) {
-            this.et_rpw.error = "Password must be at least 8 characters!"
-            this.et_rusername.requestFocus()
-            hasEmpty = true
-        }
-
-        return hasEmpty
-    }
-
-    // checks input email and returns true if email is valid and false if not
-    private fun isValidEmail(str: String): Boolean{
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(str).matches()
-    }
-
-    // adds user to the database
-    private fun storeUser(user: User) {
-        progressRegister.visibility = View.VISIBLE
-
-        // Register the user to Firebase
-        mAuth.createUserWithEmailAndPassword(user.email, user.password)
-            .addOnCompleteListener(
-                this
-            ) { task ->
-                if (task.isSuccessful) {
-                    database.getReference(Keys.USERS.name)
-                        .child(mAuth.currentUser!!.uid)
-                        .setValue(user).addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                successfulRegistration()
-                            } else {
-                                failedRegistration()
-                            }
-                        }
-                } else {
-                    failedRegistration()
-                }
             }
     }
 
-    // notifies the user that they have successfully registered and redirect them to their main concert list
-    private fun successfulRegistration() {
-        this.progressRegister.visibility = View.GONE
-        Toast.makeText(this, "You have successfully registered! Welcome!", Toast.LENGTH_SHORT).show();
-        val chatIntent = Intent(this, MainActivity::class.java)
-        startActivity(chatIntent)
-        finish()
-    }
-
-    // presents an error message when user fails to register
-    private fun failedRegistration() {
-        this.progressRegister.visibility = View.GONE
-        Toast.makeText(this, "You have failed to register :( try again!", Toast.LENGTH_SHORT).show()
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed() // go back to prev activity when action bar back btn is closed
+        return super.onSupportNavigateUp()
     }
 }
