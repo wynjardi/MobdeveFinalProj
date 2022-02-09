@@ -1,112 +1,121 @@
 package com.mobdeve.jardiniano.see
 
 import android.Manifest
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Patterns
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
+import com.mobdeve.jardiniano.see.databinding.ActivityLoginBinding
 
 
 class Login : AppCompatActivity() {
-    private lateinit var et_lemail: EditText
-    private lateinit var et_lpassword: EditText
-    private lateinit var btn_llogin: Button
-    private lateinit var tvCreate: TextView
-    private lateinit var pbLogin: ProgressBar
 
-    // Firebase and Permissions
-    private lateinit var mAuth: FirebaseAuth
+    //ViewBinding
+    private lateinit var binding:ActivityLoginBinding
 
-    val permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO)
-    val requestCode = 1
+    //ActionBar
+    private lateinit var actionBar: ActionBar
+
+    //ProgressDialog
+    private lateinit var progressDialog:ProgressDialog
+
+    //FirebaseAuth
+    private lateinit var firebaseAuth: FirebaseAuth
+    private var email = ""
+    private var password = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        //configure actionbar
+        actionBar = supportActionBar!!
+        actionBar.title="Login"
 
-        this.initFirebase()
-        this.initComponents()
+        //configure progress dialog
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Please wait")
+        progressDialog.setMessage("Logging in...")
+        progressDialog.setCanceledOnTouchOutside(false)
 
-        // once accepted the login details, will redirect to our main list of concerts
-        if (this.mAuth.currentUser != null) {
-            startActivity(Intent(this, MainActivity::class.java))
+        //init firebaseAuth
+        firebaseAuth = FirebaseAuth.getInstance()
+        checkUser()
+
+        //handle click, open reg
+        binding.logreg.setOnClickListener{
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
+
+        //handle click, begin login
+        binding.btnLlogin.setOnClickListener{
+
+            //before loggin in, validate data
+            validateData()
+        }
+    }
+
+    private fun validateData(){
+        //get data
+        email = binding.etLemail.text.toString().trim()
+        password = binding.etLpassword.text.toString().trim()
+
+        //validate data
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            //invalid email format
+            binding.etLemail.error="Invalid email format"
+        }
+        else if (TextUtils.isEmpty(password)){
+            // no password entered
+            binding.etLpassword.error = "Please enter password"
+        }
+        else{
+            //data is validated, begin login
+            firebaseLogin()
+        }
+    }
+
+    private fun firebaseLogin(){
+        //show progress
+        progressDialog.show()
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+            .addOnSuccessListener {
+                //login success
+                progressDialog.dismiss()
+                //get user info
+                val firebaseUser = firebaseAuth.currentUser
+                val email = firebaseUser!!.email
+                Toast.makeText(this,"Logged in as $email", Toast.LENGTH_SHORT).show()
+
+                //open profile
+                startActivity(Intent(this, ProfileActivity::class.java))
+                finish()
+            }
+
+            .addOnFailureListener{ e->
+                //login failed
+                progressDialog.dismiss()
+                Toast.makeText(this, "Login failed due to ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun checkUser() {
+        //if user is already logged in, redirect to profile activity
+        val firebaseUser = firebaseAuth.currentUser
+        if (firebaseUser != null){
+            //user is logged in
+            startActivity(Intent(this, ProfileActivity::class.java))
             finish()
         }
-    }
-
-    private fun initFirebase() {
-        this.mAuth = FirebaseAuth.getInstance();
-    }
-
-    private fun initComponents() {
-        this.et_lemail = findViewById(R.id.et_lemail)
-        this.et_lpassword = findViewById(R.id.et_lpassword)
-        this.btn_llogin = findViewById(R.id.btn_llogin)
-        this.tvCreate = findViewById(R.id.logreg)
-        this.pbLogin = findViewById(R.id.pb_login)
-
-        this.btn_llogin.setOnClickListener {
-            // gets the user input
-            var email = et_lemail.text.toString().trim()
-            var password = et_lpassword.text.toString().trim()
-
-            // if user details for pw and email are both filled in, will log in
-            if(!checkEmpty(email, password)) {
-                signIn(email, password)
-            }
-        }
-
-    }
-
-    // checks for empty fields
-    // returns true if there is an empty field and false if none
-    private fun checkEmpty(email: String, password: String): Boolean {
-        var hasEmpty: Boolean = false;
-
-        // if email field is empty, prompt user to input email
-        if(email.isEmpty()) {
-            this.et_lemail.error = "Required field"
-            this.et_lemail.requestFocus()
-            hasEmpty = true
-        }
-
-        // if password is empty, prompt user to input password
-        if(password.isEmpty()) {
-            this.et_lpassword.error = "Required field"
-            this.et_lpassword.requestFocus()
-            hasEmpty = true
-        }
-
-        return hasEmpty
-    }
-
-    // logs the user in to their account given an email and a password
-    private fun signIn(email: String, password: String) {
-        this.pbLogin.visibility = View.VISIBLE
-
-        mAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(
-                this
-            ) { task ->
-                // if successfully logged in, redirect to our main concert list
-                if (task.isSuccessful) {
-                    val chatIntent = Intent(this, MainActivity::class.java)
-                    startActivity(chatIntent)
-                    finish()
-                } else {
-                    failedLogin();
-                }
-            }
-    }
-
-    // presents an error message when user fails to log in
-    private fun failedLogin() {
-        this.pbLogin.visibility = View.GONE
-        Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
     }
 }

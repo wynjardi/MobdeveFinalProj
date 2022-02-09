@@ -1,147 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     tools:context=".Login"
     android:background="#b0c4de">
 
     <ImageView
-        android:id="@+id/loginlogo"
-        android:layout_width="126dp"
-        android:layout_height="126dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintEnd_toStartOf="@+id/loginright"
-        app:layout_constraintStart_toStartOf="@+id/loginleft"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ouricon" />
-
+        android:layout_width="100sp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="130dp"
+        android:src="@drawable/ouricon"/>
     <TextView
-        android:id="@+id/loginlogotext"
+        android:id="@+id/InstagedTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="InStaged"
-        android:textColor="?android:attr/colorForeground"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toEndOf="@+id/loginlogo"
-        app:layout_constraintStart_toStartOf="@+id/loginlogo"
-        app:layout_constraintTop_toBottomOf="@+id/loginlogo" />
+        android:layout_centerHorizontal="true"
+        android:text="Instaged"
+        style="@style/TextAppearance.MaterialComponents.Headline4"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/logintop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="295dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/loginleft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="60dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/loginright"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="60dp" />
-
-    <TextView
-        android:id="@+id/loginemail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="E-mail"
-        android:textColor="?android:attr/colorForeground"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/loginleft"
-        app:layout_constraintTop_toTopOf="@+id/logintop" />
+<com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/loginemail"
+    android:layout_marginBottom="10dp"
+    android:layout_above="@id/loginpw">
 
     <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/et_lemail"
-        android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:backgroundTint="?android:attr/colorForeground"
-        android:ems="10"
-        android:inputType="textWebEmailAddress"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textColor="?android:attr/colorForeground"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/loginright"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="@+id/loginleft"
-        app:layout_constraintTop_toBottomOf="@+id/loginemail" />
+        android:hint="Email"
+        android:inputType="textEmailAddress"/>
 
-    <TextView
-        android:id="@+id/tv_login_password_label"
-        android:layout_width="wrap_content"
+</com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Password"
-        android:textColor="?android:attr/colorForeground"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/loginleft"
-        app:layout_constraintTop_toBottomOf="@+id/et_lemail" />
+        android:id="@+id/loginpw"
+        app:passwordToggleEnabled="true"
+        android:layout_centerInParent="true">
 
-    <EditText
-        android:id="@+id/et_lpassword"
-        android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:backgroundTint="?android:attr/colorForeground"
-        android:ems="10"
-        android:foregroundTint="?android:attr/colorForeground"
-        android:inputType="textPassword"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textColor="?android:attr/colorForeground"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/loginright"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="@+id/loginleft"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login_password_label" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_lpassword"
+            android:inputType="textPassword"
+            android:hint="Password"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_llogin"
         android:backgroundTint="#536895"
         android:layout_width="134dp"
         android:layout_height="36dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginLeft="125dp"
+        android:layout_below="@id/loginpw"
+        android:layout_marginTop="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
         android:text="Login"
         android:textColor="?android:attr/colorForeground"
         android:textStyle="bold"
-        app:backgroundTint="?android:attr/colorForeground"
-        app:layout_constraintEnd_toStartOf="@+id/loginright"
-        app:layout_constraintStart_toStartOf="@+id/loginleft"
-        app:layout_constraintTop_toBottomOf="@+id/et_lpassword" />
+        app:backgroundTint="?android:attr/colorForeground"/>
 
     <TextView
         android:id="@+id/logreg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/btn_llogin"
+        android:layout_marginLeft="150dp"
         android:layout_marginTop="18dp"
         android:text="Register instead"
         android:textColor="?android:attr/colorForeground"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/loginright"
-        app:layout_constraintStart_toStartOf="@+id/loginleft"
         app:layout_constraintTop_toBottomOf="@+id/btn_llogin" />
 
-    <ProgressBar
-        android:id="@+id/pb_login"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:translationZ="10dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

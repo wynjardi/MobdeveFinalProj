@@ -29,7 +29,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(
                 Intent(
                     this@HomeActivity,
-                    MainActivity::class.java
+                    RegisterActivity::class.java
                 )
             )
 
