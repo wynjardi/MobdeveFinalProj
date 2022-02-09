@@ -28,7 +28,7 @@ class  RecyclerAdapterConcertList(
     private var concertImagesTitles = arrayOf(R.drawable.harry_styles_picture, R.drawable.billie_eilish_picture,R.drawable.taylor_swift_picture)
     private var concertNameTitles = arrayOf("Love on Tour", "When We All Fall Asleep Tour", "Fearless Tour")
     private var concertArtistName = arrayOf("Harry Styles", "Billie Eilish", "Taylor Swift")
-    private var concertDateTitles = arrayOf("November 20, 2021 8PM TO 11PM", "July 06, 2021 8PM TO 11PM", "`March 16, 20208PM TO 11PM`")
+    private var concertDateTitles = arrayOf("November 20, 2021 8PM TO 11PM", "July 06, 2021 8PM TO 11PM", "March 16, 20208PM TO 11PM")
     private var concertPricesTitles= arrayOf("Total prices are as follows: P20,000 P10,000 P5,000", "Total prices are as follows: P30,000 P15,000 P5,000", "Total prices are as follows: P20,000 P10,000 P5,000")
     private var concertPlaceTitles = arrayOf("Mall of Asia Arena, Pasay City", "Araneta Coliseum, Quezon City", "Kita Theatre, Quezon City")
 
