@@ -54,26 +54,49 @@ class MainActivity : AppCompatActivity() {
 //            LinearLayoutManager.VERTICAL, false
 //        )
 
+
         binding.listview.isClickable = true
         binding.listview.adapter = MyAdapter(this, concertlst)
         binding.listview.setOnItemClickListener { parent,view, position, id ->
 
-            val ConcertPicture = ConcertPicture[position]
-            val ConcertName = ConcertName[position]
-            val ConcertArtistName = ConcertArtistName[position]
-            val ConcertDateTime = ConcertDateTime[position]
-            val ConcertPlace = ConcertPlace[position]
-            val ConcertPrices = ConcertPrices[position]
+           if(position==0){
+               startActivity(
+                   Intent(
+                       this@MainActivity,
+                       ConcertDetailsHarryActivity::class.java))}
+           else if (position==1){
+               startActivity(
+                   Intent(
+                       this@MainActivity,
+                       ConcertDetailsBillieActivity::class.java ))}
+           else if (position==2){Intent(
+               this@MainActivity,
+               ConcertDetailsBillieActivity::class.java
+           )}
 
-            val i = Intent(this,ConcertDetailsHarryActivity::class.java)
-            i.putExtra( "ConcertPicture",ConcertPicture)
-            i.putExtra( "ConcertName",ConcertName)
-            i.putExtra( "ConcertArtistName",ConcertArtistName)
-            i.putExtra( "ConcertDateTime",ConcertDateTime)
-            i.putExtra( "ConcertPlace",ConcertPlace)
-            i.putExtra( "ConcertPrices",ConcertPrices)
-            startActivity(i)
         }
+
+        NavBar(findViewById<BottomNavigationView>(com.mobdeve.jardiniano.see.R.id.bottom_nav), this, com.mobdeve.jardiniano.see.R.id.menuHomeIcon)
+        }
+
+//        binding.listview.setOnItemClickListener { parent,view, position, id ->
+//
+//            val ConcertPicture = ConcertPicture[position]
+//            val ConcertName = ConcertName[position]
+//            val ConcertArtistName = ConcertArtistName[position]
+//            val ConcertDateTime = ConcertDateTime[position]
+//            val ConcertPlace = ConcertPlace[position]
+//            val ConcertPrices = ConcertPrices[position]
+//
+//            val i = Intent(this,ConcertDetailsHarryActivity::class.java)
+//            i.putExtra( "ConcertPicture",ConcertPicture)
+//            i.putExtra( "ConcertName",ConcertName)
+//            i.putExtra( "ConcertArtistName",ConcertArtistName)
+//            i.putExtra( "ConcertDateTime",ConcertDateTime)
+//            i.putExtra( "ConcertPlace",ConcertPlace)
+//            i.putExtra( "ConcertPrices",ConcertPrices)
+//            startActivity(i)
+//        }
 //        binding.listview.setOnClickListener{
 //            startActivity(
 //                Intent(
@@ -84,7 +107,8 @@ class MainActivity : AppCompatActivity() {
 //
 //        }
 
-        NavBar(findViewById<BottomNavigationView>(com.mobdeve.jardiniano.see.R.id.bottom_nav), this, com.mobdeve.jardiniano.see.R.id.menuHomeIcon)
+
+
     }
 
 
@@ -107,7 +131,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 
 
-    }
+
 
 
 

@@ -19,11 +19,10 @@
         />
 
     <ImageView
-        android:id="@+id/concert_img_details"
-
+        android:src="@drawable/harry_styles_picture"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:text="Total prices are as follows:"
+
         android:textSize="15dp"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="60dp"/>
@@ -52,7 +51,7 @@
         android:layout_marginLeft="50dp"/>
 
     <TextView
-        android:id="@+id/detailed_concert_place"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mall of Asia Arena, Pasay City"
@@ -62,16 +61,16 @@
     <TextView
         android:id="@+id/detailed_concert_prices"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:textSize="15dp"
+        android:layout_height="25dp"
+        android:text="Total prices are as follows:"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="60dp"/>
+        android:layout_marginTop="60dp"
+        android:textSize="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:text="P20,000 P10,000 P5,000"
         android:textSize="15dp"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="10dp"/>

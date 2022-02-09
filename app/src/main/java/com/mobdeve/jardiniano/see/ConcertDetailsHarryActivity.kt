@@ -13,7 +13,7 @@ class ConcertDetailsHarryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_concert_details_harry)
-
+        setContentView(binding!!.root)
 
 //        getIntent().getStringExtra("Concert Picture")?.let { binding!!.concertImgDetails.setImageResource(it.toInt()) }
 
