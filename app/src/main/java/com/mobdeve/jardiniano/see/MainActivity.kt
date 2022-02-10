@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity() {
            ))}
 
         }
+        val yourBool = intent.extras!!.getBoolean("yourBoolName")
 
         NavBar(findViewById<BottomNavigationView>(com.mobdeve.jardiniano.see.R.id.bottom_nav), this, com.mobdeve.jardiniano.see.R.id.menuHomeIcon)
         }

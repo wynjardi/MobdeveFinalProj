@@ -8,6 +8,7 @@ import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.location.LocationRequest
+import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
@@ -39,6 +40,7 @@ class SubscribelistActivity : AppCompatActivity() {
         setContentView(binding!!.root)
         val textView = findViewById<TextView?>(R.id.my_location)
 
+
         NavBar(findViewById<BottomNavigationView>(R.id.bottom_nav), this, R.id.subscribeIcon)
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
@@ -54,7 +56,6 @@ class SubscribelistActivity : AppCompatActivity() {
         }
 
     }
-
 
 
 

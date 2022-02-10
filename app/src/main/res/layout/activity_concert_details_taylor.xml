@@ -73,14 +73,20 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="10dp"/>
 
-    <Button
+    <ToggleButton
         android:id="@+id/btn_concert_subscribe"
+
         android:textSize="15dp"
-        android:text="SUBSCRIBE"
+        android:textOff="SUBSCRIBE"
+        android:outlineAmbientShadowColor="@android:color/holo_purple"
+        android:textColor="@color/white"
         android:layout_width="150dp"
+        android:background="@drawable/button_toggle"
+        android:textOn="SUBSCRIBED"
+        app:useMaterialThemeColors="false"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="50dp"
-        />
 
+        />
 </LinearLayout>
