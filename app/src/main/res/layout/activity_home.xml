@@ -24,6 +24,7 @@
         android:src="@drawable/ouricon"
         android:layout_height="250dp"
         android:scaleType="centerInside"
+        android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"/>
 

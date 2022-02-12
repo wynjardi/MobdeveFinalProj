@@ -7,11 +7,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".SplashActivity"
+    android:background="#b0c4de"
     >
 
     <TextView
+        android:id="@+id/InstagedTitle"
+        style="@style/TextAppearance.MaterialComponents.Headline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SPLASH"/>
+        android:layout_gravity="center"
+        android:text="Instaged"
+        android:layout_marginTop="150dp"
+        android:textStyle="bold"/>
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginBottom="200dp"
+
+        android:layout_gravity="center"
+        android:src="@drawable/ouricon" />
 
 </LinearLayout>

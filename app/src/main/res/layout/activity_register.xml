@@ -13,9 +13,10 @@
         android:id="@+id/ouricon"
         android:layout_width="100sp"
         android:layout_height="100dp"
-        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="130dp"
-        android:src="@drawable/ouricon"/>
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ouricon" />
     <TextView
         android:id="@+id/InstagedTitle"
         android:layout_width="wrap_content"
