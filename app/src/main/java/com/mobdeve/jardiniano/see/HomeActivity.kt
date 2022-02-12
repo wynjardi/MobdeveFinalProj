@@ -19,7 +19,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(
                 Intent(
                     this@HomeActivity,
-                    MainActivity::class.java
+                    Login::class.java
                 )
             )
 

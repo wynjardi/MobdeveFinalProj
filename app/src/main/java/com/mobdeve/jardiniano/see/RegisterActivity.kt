@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.*
@@ -29,6 +30,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private var email = ""
     private var password = ""
+    private var name = ""
     private lateinit var database: FirebaseDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,25 +58,37 @@ class RegisterActivity : AppCompatActivity() {
             //validate data
             validateData()
         }
+
+        //handle click, open login instead
+        binding.logreg.setOnClickListener{
+            startActivity(Intent(this, Login::class.java))
+            finish()
+        }
+
     }
 
     private fun validateData() {
         //get data
-        email = binding.etLemail.text.toString().trim()
-        password = binding.etLpassword.text.toString().trim()
+        email = binding.etRemail.text.toString().trim()
+        password = binding.etRpassword.text.toString().trim()
+        name = binding.etLname.text.toString().trim()
 
         //validate data
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             //invalid email format
-            binding.etLemail.error="Invalid email format"
+            binding.etRemail.error="Invalid: Use the correct email format!"
+        }
+        else if (TextUtils.isEmpty(name)) {
+            //name not entered
+            binding.etRpassword.error = "Required Field: Please enter your name!"
         }
         else if (TextUtils.isEmpty(password)){
             //password not entered
-            binding.etLpassword.error="Please enter a password"
+            binding.etRpassword.error="Required Field: Please enter a password!"
         }
         else if (password.length<6){
             //password length is less than 6
-            binding.etLpassword.error = "Password needs more than 5 characters"
+            binding.etRpassword.error = "Invalid: Password needs more than 5 characters"
         }
         else{
             //data is valid, continue reg process
@@ -95,10 +109,10 @@ class RegisterActivity : AppCompatActivity() {
                 //get current user
                 val firebaseUser = firebaseAuth.currentUser
                 val email = firebaseUser!!.email
-                Toast.makeText(this,"You successfully registered with $email!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"You successfully registered with $email! Welcome to InStaged!",Toast.LENGTH_SHORT).show()
 
-                //open profile
-                startActivity(Intent(this, ProfileActivity::class.java))
+                //once registered, opens concert list view
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
 
