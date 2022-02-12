@@ -54,12 +54,11 @@ class Login : AppCompatActivity() {
 
         //init firebaseAuth
         firebaseAuth = FirebaseAuth.getInstance()
-        checkUser()
+
 
         //handle click, open reg
         binding.logreg.setOnClickListener{
             startActivity(Intent(this, RegisterActivity::class.java))
-            finish()
         }
 
         //handle click, begin login
@@ -68,7 +67,6 @@ class Login : AppCompatActivity() {
             //before loggin in, validate data
             validateData()
         }
-
     }
 
     private fun validateData(){
@@ -79,11 +77,11 @@ class Login : AppCompatActivity() {
         //validate data
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             //invalid email format
-            binding.etLemail.error="Invalid: Use the correct email format!"
+            binding.etLemail.error="Invalid email format"
         }
         else if (TextUtils.isEmpty(password)){
             // no password entered
-            binding.etLpassword.error = "Invalid: Password needs more than 5 characters"
+            binding.etLpassword.error = "Please enter password"
         }
         else{
             //data is validated, begin login
@@ -96,18 +94,17 @@ class Login : AppCompatActivity() {
         progressDialog.show()
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
-
-                checkUser()
                 //login success
-                progressDialog.dismiss()
-                //get user info
-                val firebaseUser = firebaseAuth.currentUser
-                val email = firebaseUser!!.email
-                Toast.makeText(this,"Logged in as $email", Toast.LENGTH_SHORT).show()
-
-                //once logged in, this will open concert list view
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+//                progressDialog.dismiss()
+//                //get user info
+//                val firebaseUser = firebaseAuth.currentUser
+//                val email = firebaseUser!!.email
+//                Toast.makeText(this,"Logged in as $email", Toast.LENGTH_SHORT).show()
+//
+//                //open profile
+//                startActivity(Intent(this, ProfileActivity::class.java))
+//                finish()
+                checkUser()
             }
 
             .addOnFailureListener{ e->
@@ -141,7 +138,7 @@ class Login : AppCompatActivity() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+
                 }
             })
 //        if (firebaseUser != null){
