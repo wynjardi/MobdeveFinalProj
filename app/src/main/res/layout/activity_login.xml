@@ -62,18 +62,18 @@
 
     <Button
         android:id="@+id/btn_Llogin"
-        android:backgroundTint="#536895"
         android:layout_width="134dp"
         android:layout_height="36dp"
-        android:layout_marginLeft="125dp"
         android:layout_below="@id/loginpw"
+        android:layout_marginLeft="125dp"
         android:layout_marginTop="10dp"
+        android:backgroundTint="#536895"
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
         android:text="Login"
         android:textColor="?android:attr/colorForeground"
         android:textStyle="bold"
-        app:backgroundTint="?android:attr/colorForeground"/>
+        app:backgroundTint="?android:attr/colorForeground" />
 
     <TextView
         android:id="@+id/logreg"
