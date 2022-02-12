@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,6 +10,7 @@
     >
 
     <TextView
+        android:id="@+id/profilemain"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="20dp"
@@ -18,21 +19,32 @@
         android:text="Profile"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/profilewelcome"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Welcome to your profile!"
+        android:textAlignment="center"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilemain"
+        android:text="You're logged in!"
         style="@style/TextAppearance.MaterialComponents.Body1"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:textAlignment="center"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilewelcome"
         android:id="@+id/profileEmail"
         android:text="Email here"
         style="@style/TextAppearance.MaterialComponents.Body1"/>
-
-    <LinearLayout
+    <Button
+        android:id="@+id/btn_logout"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -57,6 +69,7 @@
 
 
 
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
@@ -70,5 +83,4 @@
         app:showAsAction="always"
         android:layout_alignParentBottom="true"
         />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

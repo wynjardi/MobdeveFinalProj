@@ -9,13 +9,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mobdeve.jardiniano.see.databinding.ActivityMainBinding
 import android.R
 import android.content.Intent
+import android.widget.ListView
+import android.widget.Toast
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
     private lateinit var concertlst: ArrayList<Concerts>
-//    var adapterrecycle: RecyclerAdapterConcertList? = null
+//    private var adapterrecycle: MyAdapter? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +35,8 @@ class MainActivity : AppCompatActivity() {
 
         val ConcertArtistName = arrayOf("Harry Styles", "Billie Eilish", "Taylor Swift")
 
-        val ConcertDateTime = arrayOf("November 20, 2021 8PM TO 11PM", "July 06, 2021 8PM TO 11PM", "March 16, 2020 8PM TO 11PM")
-        val ConcertPlace = arrayOf("Mall of Asia Arena, Pasay City", "Araneta Coliseum, Quezon City", "Kita Theatre, Quezon City")
+        val ConcertDateTime = arrayOf("November 20, 2021 ", "July 06, 2021 ", "March 16, 2020 ")
+        val ConcertPlace = arrayOf("Mall of Asia Arena, Pasay City", "Araneta Coliseum, Quezon City", "Kia Theatre, Quezon City")
         val ConcertPrices = arrayOf("Total prices are as follows: P20,000 P10,000 P5,000", "Total prices are as follows: P30,000 P15,000 P5,000", "Total prices are as follows: P20,000 P10,000 P5,000")
 
         concertlst = ArrayList()
@@ -55,26 +56,31 @@ class MainActivity : AppCompatActivity() {
 //        )
 
 
+
         binding.listview.isClickable = true
         binding.listview.adapter = MyAdapter(this, concertlst)
+
+        //when clicked , must go to specific detailed concert activity
         binding.listview.setOnItemClickListener { parent,view, position, id ->
 
-           if(position==0){
-               startActivity(
+           when (position){
+               0-> startActivity(
                    Intent(
                        this@MainActivity,
                        ConcertDetailsHarryActivity::class.java))}
-           else if (position==1){
-               startActivity(
+           when (position){
+               1-> startActivity(
                    Intent(
                        this@MainActivity,
                        ConcertDetailsBillieActivity::class.java ))}
-           else if (position==2){Intent(
+           when (position){
+               2-> startActivity(Intent(
                this@MainActivity,
-               ConcertDetailsBillieActivity::class.java
-           )}
+               ConcertDetailsTaylorActivity::class.java
+           ))}
 
         }
+        val yourBool = intent.extras!!.getBoolean("yourBoolName")
 
         NavBar(findViewById<BottomNavigationView>(com.mobdeve.jardiniano.see.R.id.bottom_nav), this, com.mobdeve.jardiniano.see.R.id.menuHomeIcon)
         }

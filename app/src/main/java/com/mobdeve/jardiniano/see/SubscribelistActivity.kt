@@ -1,20 +1,28 @@
 package com.mobdeve.jardiniano.see
 
+import android.annotation.SuppressLint
 import android.content.ContentProviderClient
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.location.LocationRequest
+import android.os.AsyncTask
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.gms.location.*
+import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
+
 import com.mobdeve.jardiniano.see.databinding.ActivitySubscribelistBinding
+import java.util.*
 import java.util.jar.Manifest
 
 class SubscribelistActivity : AppCompatActivity() {
@@ -23,13 +31,15 @@ class SubscribelistActivity : AppCompatActivity() {
     lateinit var locationRequest: LocationRequest
     val PERMISSION_ID = 1000
 
-
     lateinit var binding: ActivitySubscribelistBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySubscribelistBinding.inflate(layoutInflater)
 
         setContentView(binding!!.root)
+        val textView = findViewById<TextView?>(R.id.my_location)
+
 
         NavBar(findViewById<BottomNavigationView>(R.id.bottom_nav), this, R.id.subscribeIcon)
 
@@ -46,7 +56,6 @@ class SubscribelistActivity : AppCompatActivity() {
         }
 
     }
-
 
 
 
@@ -73,6 +82,8 @@ class SubscribelistActivity : AppCompatActivity() {
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
+
+//
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -87,7 +98,20 @@ class SubscribelistActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+//    private fun getCityName(lat: Double,long: Double):String{
+//        var cityName:String = ""
+//        var countryName = ""
+//        var geoCoder = Geocoder(this, Locale.getDefault())
+//        var Adress = geoCoder.getFromLocation(lat,long,3)
+//
+//        cityName = Adress.get(0).locality
+//        countryName = Adress.get(0).countryName
+//        Log.d("Debug:","Your City: " + cityName + " ; your Country " + countryName)
+//        return cityName
+//    }
+////
 //    fun getLastLocation(){
+//    val textView = findViewById<TextView?>(R.id.my_location)
 //        if(checkPermission()){
 //            if(isLocationEnabled()){
 //                fusedLocationProviderClient.lastLocation.addOnCompleteListener {task->
@@ -96,7 +120,7 @@ class SubscribelistActivity : AppCompatActivity() {
 //                        NewLocationData()
 //                    }else{
 //                        Log.d("Debug:" ,"Your Location:"+ location.longitude)
-//                        text.text = "You Current Location is : Long: "+ location.longitude + " , Lat: " + location.latitude + "\n" + getCityName(location.latitude,location.longitude)
+//                        textView.setText( "You Current Location is : Long: "+ location.longitude + " , Lat: " + location.latitude + "\n" + getCityName(location.latitude,location.longitude)).toString()
 //                    }
 //                }
 //            }else{
@@ -106,26 +130,29 @@ class SubscribelistActivity : AppCompatActivity() {
 //            requestPermission()
 //        }
 //    }
-
+//////
+//    @SuppressLint("MissingPermission")
 //    fun NewLocationData(){
 //        var locationRequest =  LocationRequest()
-//        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+//        locationRequest.priority = PRIORITY_HIGH_ACCURACY
 //        locationRequest.interval = 0
 //        locationRequest.fastestInterval = 0
 //        locationRequest.numUpdates = 1
 //        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 //        fusedLocationProviderClient!!.requestLocationUpdates(
-//            locationRequest,locationCallback,Looper.myLooper()
+//            locationRequest,locationCallback, Looper.myLooper()
 //        )
 //    }
-//
-//
+//////
+//////
 //    private val locationCallback = object : LocationCallback(){
+//    val textView = findViewById<TextView?>(R.id.my_location)
 //        override fun onLocationResult(locationResult: LocationResult) {
 //            var lastLocation: Location = locationResult.lastLocation
 //            Log.d("Debug:","your last last location: "+ lastLocation.longitude.toString())
-//            textView.text = "You Last Location is : Long: "+ lastLocation.longitude + " , Lat: " + lastLocation.latitude + "\n" + getCityName(lastLocation.latitude,lastLocation.longitude)
+//            textView.setText( "You Last Location is : Long: "+ lastLocation.longitude + " , Lat: " + lastLocation.latitude + "\n" + getCityName(lastLocation.latitude,lastLocation.longitude)).toString()
 //        }
+//
 //    }
 }
 

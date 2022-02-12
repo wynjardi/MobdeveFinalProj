@@ -104,6 +104,8 @@ class RegisterActivity : AppCompatActivity() {
         //create account
         firebaseAuth.createUserWithEmailAndPassword(email,password)
             .addOnSuccessListener {
+                // added this, add user info
+                updateUserInfo()
                 //reg success
                 progressDialog.dismiss()
                 //get current user
@@ -127,5 +129,33 @@ class RegisterActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed() // go back to prev activity when action bar back btn is closed
         return super.onSupportNavigateUp()
+    }
+
+    private fun updateUserInfo(){
+        progressDialog.setMessage("Saving user info...")
+
+        // we can get it now bc user is registered
+        val uid = firebaseAuth.uid
+        val hashMap: HashMap<String, Any?> = HashMap()
+        hashMap["uid"] = uid
+        hashMap["email"] = email
+        hashMap["password"] = password
+        hashMap["userType"] = "user"
+
+
+        //set data to db
+        val ref = FirebaseDatabase.getInstance().getReference("Users")
+        ref.child(uid!!)
+            .setValue(hashMap)
+            .addOnSuccessListener {
+                progressDialog.dismiss()
+                Toast.makeText(this,"Account created..", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this@RegisterActivity, DashboardUserActivity::class.java))
+                finish()
+            }
+            .addOnFailureListener{e->
+                progressDialog.dismiss()
+                Toast.makeText(this,"Failed saving user info because of ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 }
