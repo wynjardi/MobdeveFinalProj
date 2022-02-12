@@ -30,16 +30,15 @@
 
             />
 
-        <Button
+        <ImageButton
             android:id="@+id/logoutbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
             android:background="@color/purple_200"
-            android:src="@drawable/ic_logout_white"/>
-
-
+            android:src="@drawable/ic_logout_white" />
 
 
     </RelativeLayout>

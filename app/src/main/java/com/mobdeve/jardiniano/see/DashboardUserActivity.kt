@@ -1,5 +1,6 @@
 package com.mobdeve.jardiniano.see
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil.setContentView
@@ -25,6 +26,11 @@ class DashboardUserActivity : AppCompatActivity(){
         firebaseAuth = FirebaseAuth.getInstance()
         checkUser()
 
+        binding.logoutbtn.setOnClickListener{
+            firebaseAuth.signOut()
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+        }
 
 
     }
