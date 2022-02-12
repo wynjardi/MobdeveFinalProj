@@ -59,6 +59,7 @@ class Login : AppCompatActivity() {
         //handle click, open reg
         binding.logreg.setOnClickListener{
             startActivity(Intent(this, RegisterActivity::class.java))
+            finish()
         }
 
         //handle click, begin login
@@ -67,6 +68,7 @@ class Login : AppCompatActivity() {
             //before loggin in, validate data
             validateData()
         }
+
     }
 
     private fun validateData(){
@@ -77,11 +79,11 @@ class Login : AppCompatActivity() {
         //validate data
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             //invalid email format
-            binding.etLemail.error="Invalid email format"
+            binding.etLemail.error="Invalid: Use the correct email format!"
         }
         else if (TextUtils.isEmpty(password)){
             // no password entered
-            binding.etLpassword.error = "Please enter password"
+            binding.etLpassword.error = "Invalid: Password needs more than 5 characters"
         }
         else{
             //data is validated, begin login
@@ -103,8 +105,8 @@ class Login : AppCompatActivity() {
                 val email = firebaseUser!!.email
                 Toast.makeText(this,"Logged in as $email", Toast.LENGTH_SHORT).show()
 
-                //open profile
-                startActivity(Intent(this, ProfileActivity::class.java))
+                //once logged in, this will open concert list view
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
 

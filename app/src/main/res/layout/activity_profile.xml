@@ -47,7 +47,26 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log Out"/>
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_editprofile"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            android:layout_marginRight="100dp"
+            android:layout_marginLeft="40dp"/>
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log Out"/>
+
+    </LinearLayout>
+
 
 
 
@@ -58,8 +77,10 @@
         app:backgroundTint="@color/colorPrimary"
         app:menu="@menu/app_bar_menu"
         android:layout_gravity="bottom"
+        android:layout_marginTop="450dp"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:showAsAction="always"
+        android:layout_alignParentBottom="true"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

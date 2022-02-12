@@ -24,7 +24,7 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //configure action bar 
+        //configure action bar
         actionBar = supportActionBar!!
         actionBar.title = "Profile"
 
@@ -36,6 +36,15 @@ class ProfileActivity : AppCompatActivity() {
         binding.btnLogout.setOnClickListener{
             firebaseAuth.signOut()
             checkUser()
+        }
+
+        binding!!.btnEditprofile.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@ProfileActivity,
+                    EditProfile::class.java
+                )
+            )
         }
 
         NavBar(findViewById<BottomNavigationView>(R.id.bottom_nav), this, R.id.profileIcon)
