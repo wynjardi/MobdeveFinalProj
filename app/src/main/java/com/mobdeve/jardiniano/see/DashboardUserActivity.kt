@@ -78,7 +78,7 @@ class DashboardUserActivity : AppCompatActivity(){
                 viewPagerAdapter.addFragment(
                     ConcertUserFragment.newInstance(
                         "${modelALL.id}",
-                        "${modelALL.category}",
+                        "${modelALL.category}"
                     ), modelALL.category
                 )
                 //refresh list
@@ -91,14 +91,13 @@ class DashboardUserActivity : AppCompatActivity(){
                     categoryArrayList.add(model!!)
                     //add to viewPagerAdapter
                     viewPagerAdapter.addFragment(
-                        ConcertUserFragment.addFragment(
                             ConcertUserFragment.newInstance(
-                                "${model.id}"
-                            "${model.category}"
-                            ), model.category
+                                "${modelALL.id}",
+                                "${modelALL.category}"
+                            ), modelALL.category
                         )
                     //refresh list
-                    viewPagerAdapter.notifyDataChanged()
+                    viewPagerAdapter.notifyDataSetChanged()
                 }
             }
 
