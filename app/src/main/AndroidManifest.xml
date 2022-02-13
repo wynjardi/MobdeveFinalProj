@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MobdeveFinalProject">
         <activity
-            android:name=".ConcertDetailActivity"
+            android:name=".ConcertAddActivity"
             android:exported="false" />
         <activity
             android:name=".CategoryAddActivity"

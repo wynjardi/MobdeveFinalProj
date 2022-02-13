@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConcertAddActivity"
+    android:background="#b0c4de"
+    >
+
+    <RelativeLayout
+        android:id="@+id/toolbarRL"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#536895"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="BACK"
+            android:textColor="?android:attr/colorForeground"
+            app:backgroundTint="?android:attr/colorForeground" />
+
+
+    </RelativeLayout>
+
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:layout_below="@id/toolbarRL"
+        android:layout_gravity="center"
+        android:text="Add a new Concert "
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/titleFill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="30dp"
+        app:hintEnabled="false">
+
+        <EditText
+            android:id="@+id/concertTitleFill"
+            android:background="@drawable/shape_edittext_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_title_24_blue"
+            android:drawablePadding="10dp"
+            android:hint="Concert Title"
+            android:inputType="textPersonName|textCapSentences"
+            android:padding="10dp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    //input date
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ArtistNameFill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleFill"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="5dp"
+
+        app:hintEnabled="false">
+
+        <EditText
+            android:id="@+id/concertArtistNameFill"
+            android:background="@drawable/shape_edittext_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_person_outline_24_blue"
+            android:drawablePadding="10dp"
+            android:hint="Concert Artist"
+            android:inputType="textPersonName|textCapSentences"
+            android:padding="10dp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/categoryTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ArtistNameFill"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/shape_edittext_bg"
+        android:drawableStart="@drawable/ic_baseline_category_24_blue"
+        android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+        android:drawablePadding="10dp"
+        android:hint="Concert Category"
+        android:padding="10dp"
+        android:textSize="16sp"
+
+        />
+
+    //upload
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/categoryTv"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="10dp"
+        android:text="Add concert"/>
+
+
+
+
+</RelativeLayout>
