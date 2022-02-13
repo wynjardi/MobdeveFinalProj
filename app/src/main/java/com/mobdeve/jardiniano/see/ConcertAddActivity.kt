@@ -208,7 +208,7 @@ class ConcertAddActivity : AppCompatActivity() {
 
     private fun uploadImageToStorage(){
         
-            val filePathAndName = ("Uploads/" )
+            val filePathAndName = ("Uploads/" + UUID.randomUUID().toString())
             val storageReference = FirebaseStorage.getInstance().getReference(filePathAndName)
 
             val timestamp = System.currentTimeMillis()
