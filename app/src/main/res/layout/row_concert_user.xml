@@ -1,6 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/white"
+    android:layout_marginBottom="5dp"
+    app:cardElevation="0dp"
+    app:contentPadding="5dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/concertRL"
+            android:layout_width="100dp"
+            android:layout_height="140dp"
+            android:background="color/gray02"
+            android:layout_marginEnd="5dp">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </RelativeLayout>
+
+     // concert title
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/titleTv"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:text="Concert Title"
+            android:layout_toEndOf="@+id/concertRL"
+            android:maxLines="1"/>
+
+        //concert description
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/descriptionTv"
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:text="Book Description"
+            android:layout_toEndOf="@+id/concertRL"
+            android:layout_below="@id/titleTv"
+            android:maxLines="4"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"/>
+
+        //concert category
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/categoryTv"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:maxLines="1"/>
+
+        //text view addec date of comcert
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dateTv"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_toStartOf="@+id/categoryTv"
+            android:text="dd/MM/yyyy"
+            android:layout_alignParentBottom="true"
+            android:textAlignment="center"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
