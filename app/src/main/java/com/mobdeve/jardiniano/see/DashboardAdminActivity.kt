@@ -71,6 +71,12 @@ class DashboardAdminActivity : AppCompatActivity(){
         binding.addCategBtn.setOnClickListener {
             startActivity(Intent(this,CategoryAddActivity::class.java))
         }
+
+        //start add concert view page (to change)
+        binding.addConcertDet.setOnClickListener{
+            startActivity(Intent(this, ConcertAddActivity::class.java))
+        }
+
     }
 
     private fun loadCategories() {

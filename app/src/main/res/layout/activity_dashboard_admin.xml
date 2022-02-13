@@ -62,11 +62,13 @@
         android:id="@+id/categoriesRc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/searchEt"
         android:layout_above="@+id/addCategBtn"
-        android:layout_margin="5dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        />
+        android:layout_below="@+id/searchEt"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <Button
         android:id="@+id/addCategBtn"
@@ -79,8 +81,22 @@
         android:backgroundTint="#536895"
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
-
         android:text="ADD CONCERT CATEGORY"
         android:textColor="?android:attr/colorForeground"
+        app:backgroundTint="?android:attr/colorForeground" />
+
+    <Button
+        android:id="@+id/addConcertDet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/categoriesRc"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="4dp"
+        android:layout_toRightOf="@+id/addCategBtn"
+        android:backgroundTint="#536895"
+        android:text="Add Concert Details"
+        android:textColor="?android:attr/colorForeground"
+        android:textSize="8dp"
+
         app:backgroundTint="?android:attr/colorForeground" />
 </RelativeLayout>
