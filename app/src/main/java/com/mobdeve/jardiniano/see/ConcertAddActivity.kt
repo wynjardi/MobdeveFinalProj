@@ -1,10 +1,13 @@
 package com.mobdeve.jardiniano.see
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 
 import android.view.LayoutInflater
@@ -12,12 +15,20 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import com.mobdeve.jardiniano.see.databinding.ActivityConcertAddBinding
+import java.io.IOException
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ConcertAddActivity : AppCompatActivity() {
 
@@ -30,6 +41,12 @@ class ConcertAddActivity : AppCompatActivity() {
     //hold book categories
     private lateinit var categoryArrayList: ArrayList<ModelCategory>
 
+    private var storageReference: StorageReference? = null
+
+    private val PICK_IMAGE_REQUEST = 71
+    //hold the filepath of image
+    private var imageUri: Uri? = null
+
     private val TAG = "CONCERT_ADD_TAG"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +56,7 @@ class ConcertAddActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //init firebase auth
+        storageReference = FirebaseStorage.getInstance().reference
         firebaseAuth = FirebaseAuth.getInstance()
         loadConcertCategories()
 
@@ -55,37 +73,53 @@ class ConcertAddActivity : AppCompatActivity() {
             categoryPickDialog()
         }
 
+        binding.chooseImgBtn.setOnClickListener { concertImagePickIntent() }
+
         binding.submitBtn.setOnClickListener {
             validateData()
         }
 
 
+
+
     }
 
-    private var concertName = ""
-    private var  concertArtist = ""
+
+    private var concertname = ""
+    private var  concertartist = ""
     private var category= ""
 
 
     private fun validateData(){
-            //get data for name artist and categ
-        concertName = binding.concertTitleFill.toString().trim()
-        concertArtist= binding.concertArtistNameFill.toString().trim()
+        //get data for name artist and categ
+        concertname = binding.concertTitle.text.toString().trim()
+        concertartist= binding.concertArtistName.text.toString().trim()
         category = binding.categoryTv.text.toString().trim()
 
-        if (concertName.isEmpty()){
+        if (concertname.isEmpty()){
             Toast.makeText(this, "Enter Concert Name", Toast.LENGTH_SHORT).show()
 
         }
-        else if(concertArtist.isEmpty()){
+        else if(concertartist.isEmpty()){
             Toast.makeText(this, "Enter Concert Artist Name", Toast.LENGTH_SHORT).show()
         }
         else if(category.isEmpty()){
             Toast.makeText(this, "Pick Category", Toast.LENGTH_SHORT).show()
-        } //uploadChuchuToStorage()
+        } else{
+        uploadImageToStorage()}
     }
 
-    //private fun uploadChuchuToStorage(){}
+//    private fun uploadPicToStorage(){
+//
+//
+//        val timestamp = System.currentTimeMillis()
+//        //path of picture in firebase storage
+//        val filePathAndName= "Concerts/$timestamp"
+//
+//        //storage ref
+//        val storageReference = FirebaseStorage.getInstance().getReference(filePathAndName)
+//        storageReference.putFile(filePathAndName)
+//    }
 
     private fun loadConcertCategories() {
 
@@ -103,6 +137,7 @@ class ConcertAddActivity : AppCompatActivity() {
 
                     //add to arraylist
                     categoryArrayList.add(model!!)
+                    Log.d(TAG, "onDataChange: ${model.category}")
                 }
             }
 
@@ -131,14 +166,14 @@ class ConcertAddActivity : AppCompatActivity() {
             .setItems(categoriesArray){dialog, which ->
                 //handle item click
                 //get clicked
-                selectedCategoryId = categoryArrayList[which].category
-                selectedCategoryTitle = categoryArrayList[which].id
+                selectedCategoryId = categoryArrayList[which].id
+                selectedCategoryTitle = categoryArrayList[which].category
 
                 //set categ to be shown
                 binding.categoryTv.text= selectedCategoryTitle
 
                 Log.d(TAG, "Selected Categ Id: $selectedCategoryId")
-                Log.d(TAG, "Selected Categ Id: $selectedCategoryId")
+                Log.d(TAG, "Selected Categ Title: $selectedCategoryTitle")
 
 
             }
@@ -146,26 +181,98 @@ class ConcertAddActivity : AppCompatActivity() {
 
     }
 
-    private fun concertPickIntent(){
+    private fun concertImagePickIntent(){
 
         val intent = Intent()
-        intent.type = "application/concert"
+        intent.type = "image/"
         intent.action = Intent.ACTION_GET_CONTENT
-        concertAcitivityResultLauncher.launch(intent)
+        startActivityForResult(Intent.createChooser(intent, "Select Concert Tour Image"), PICK_IMAGE_REQUEST)
     }
 
-    val concertAcitivityResultLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult(),
-        ActivityResultCallback<ActivityResult> { result ->
-            if (result.resultCode == RESULT_OK){
-                Log.d(TAG, "Concert Picked")
-                //pdfUri = result.data!!.data
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK){
+            if (data == null || data.data == null){
+                return
             }
-            else{
-                Log.d(TAG, "Pick cancelled")
+
+            imageUri = data.data
+            try {
+                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
+
+            } catch (e: IOException){
+                e.printStackTrace()
             }
         }
-    )
+    }
+
+    private fun uploadImageToStorage(){
+        
+            val filePathAndName = ("Uploads/" + UUID.randomUUID().toString())
+            val storageReference = FirebaseStorage.getInstance().getReference(filePathAndName)
+
+            val timestamp = System.currentTimeMillis()
+            storageReference.putFile(imageUri!!)
+
+                .addOnSuccessListener {taskSnapshot->
+            val uriTask: Task<Uri> = taskSnapshot.storage.downloadUrl
+            while (!uriTask.isSuccessful);
+                    val uploadedImg = "${uriTask.result}"
+                    uploadImgToDb(uploadedImg, timestamp)
+                    }
+                
+                .addOnFailureListener{
+                    Toast.makeText(this, "Please Upload an Image", Toast.LENGTH_SHORT).show()
+            }
+        
+}
+
+    private fun uploadImgToDb(uploadedImg: String, timestamp: Long) {
+
+        val uid = firebaseAuth.uid
+
+        val data : HashMap<String, Any> = HashMap()
+        data["uid"] = "$uid"
+        data["id"] = "$timestamp"
+        data["imageUrl"] = "$uploadedImg"
+        data["concert artist"] = "$concertartist"
+        data["concert name"] = "$concertname"
+        data["category id"] = "$selectedCategoryId"
+        data["timestamp"] = timestamp
+
+        val ref = FirebaseDatabase.getInstance().getReference("Concerts")
+        //add firebase db to CAtegories > categoryID > categ info
+        ref.child("$timestamp")
+            .setValue(data)
+            .addOnSuccessListener {
+
+                Toast.makeText(this, "Saved to Database", Toast.LENGTH_LONG).show()
+                imageUri = null
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error saving to DB", Toast.LENGTH_LONG).show()
+            }
+    }
+
+
+//    private fun addUploadRecordToDb(uri: String){
+//
+//
+//
+//    }
+
+//    val concertAcitivityResultLauncher = registerForActivityResult(
+//        ActivityResultContracts.StartActivityForResult(),
+//        ActivityResultCallback<ActivityResult> { result ->
+//            if (result.resultCode == RESULT_OK){
+//                Log.d(TAG, "Concert Picked")
+//                //pdfUri = result.data!!.data
+//            }
+//            else{
+//                Log.d(TAG, "Pick cancelled")
+//            }
+//        }
+
 
 
 

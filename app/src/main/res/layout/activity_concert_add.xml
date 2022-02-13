@@ -52,7 +52,7 @@
         app:hintEnabled="false">
 
         <EditText
-            android:id="@+id/concertTitleFill"
+            android:id="@+id/concertTitle"
             android:background="@drawable/shape_edittext_bg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    //input date
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ArtistNameFill"
@@ -74,11 +74,10 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="5dp"
-
         app:hintEnabled="false">
 
         <EditText
-            android:id="@+id/concertArtistNameFill"
+            android:id="@+id/concertArtistName"
             android:background="@drawable/shape_edittext_bg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -108,16 +107,40 @@
 
         />
 
-    //upload
+
+
+<!--    <Button-->
+<!--        android:id="@+id/uploadImgBtn"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+
+<!--        android:layout_below="@+id/categoryTv"-->
+<!--        android:layout_marginStart="30dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginEnd="30dp"-->
+<!--        android:text="Upload Concert Image" />-->
+
     <Button
-        android:id="@+id/submitBtn"
+        android:id="@+id/chooseImgBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/categoryTv"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
         android:layout_marginTop="10dp"
-        android:text="Add concert"/>
+        android:layout_marginEnd="30dp"
+        android:text="Choose Concert Image" />
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chooseImgBtn"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:text="Add concert" />
+
+
 
 
 
