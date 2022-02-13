@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MobdeveFinalProject">
         <activity
+            android:name=".CategoryAddActivity"
+            android:exported="false" />
+        <activity
             android:name=".EditProfile"
             android:exported="false" />
         <activity
@@ -37,13 +40,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".HomeActivity"/>
-        <activity
-            android:name=".DashboardAdminActivity"/>
-        <activity
-            android:name=".DashboardUserActivity"/>
-
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".DashboardAdminActivity" />
+        <activity android:name=".DashboardUserActivity" />
         <activity android:name=".Login" />
         <activity android:name=".RegisterActivity" />
     </application>

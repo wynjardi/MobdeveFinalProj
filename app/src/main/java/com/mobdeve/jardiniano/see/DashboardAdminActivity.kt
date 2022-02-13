@@ -32,6 +32,11 @@ class DashboardAdminActivity : AppCompatActivity(){
             startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }
+
+        //handle for add category
+        binding.addCategBtn.setOnClickListener {
+            startActivity(Intent(this,CategoryAddActivity::class.java))
+        }
     }
 
     private fun checkUser(){

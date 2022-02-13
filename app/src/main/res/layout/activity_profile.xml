@@ -39,7 +39,7 @@
         android:id="@+id/profileEmail"
         android:text="Email here"
         style="@style/TextAppearance.MaterialComponents.Body1"/>
-    <Button
+    <LinearLayout
         android:id="@+id/btn_logout"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -59,7 +59,7 @@
             android:layout_marginLeft="40dp"/>
 
         <Button
-            android:id="@+id/btn_logout"
+            android:id="@+id/logoutbtn"
             android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

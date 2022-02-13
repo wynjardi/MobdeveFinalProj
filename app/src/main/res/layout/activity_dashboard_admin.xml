@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DashboardAdminActivity"
+    android:background="#b0c4de"
     >
 
     <RelativeLayout
@@ -41,7 +42,22 @@
             android:src="@drawable/ic_logout_white" />
 
 
+
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/addCategBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#536895"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
 
+        android:text="ADD CONCERT CATEGORY"
+        android:textColor="?android:attr/colorForeground"
+        app:backgroundTint="?android:attr/colorForeground" />
 </RelativeLayout>

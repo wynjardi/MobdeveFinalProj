@@ -12,16 +12,20 @@
     <ImageView
         android:layout_width="100sp"
         android:layout_height="100dp"
-        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="130dp"
-        android:src="@drawable/ouricon"/>
+        android:layout_marginTop="50dp"
+
+        android:src="@drawable/ouricon" />
+
+
     <TextView
         android:id="@+id/InstagedTitle"
+        style="@style/TextAppearance.MaterialComponents.Headline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Instaged"
-        style="@style/TextAppearance.MaterialComponents.Headline4"/>
+        android:text="Instaged" />
 
 <com.google.android.material.textfield.TextInputLayout
     android:layout_width="match_parent"
@@ -57,31 +61,31 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btn_llogin"
-        android:backgroundTint="#536895"
+        android:id="@+id/btn_Llogin"
         android:layout_width="134dp"
         android:layout_height="36dp"
-        android:layout_marginLeft="125dp"
         android:layout_below="@id/loginpw"
+        android:layout_marginLeft="125dp"
         android:layout_marginTop="10dp"
+        android:backgroundTint="#536895"
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
         android:text="Login"
         android:textColor="?android:attr/colorForeground"
         android:textStyle="bold"
-        app:backgroundTint="?android:attr/colorForeground"/>
+        app:backgroundTint="?android:attr/colorForeground" />
 
     <TextView
         android:id="@+id/logreg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_llogin"
+        android:layout_below="@id/btn_Llogin"
         android:layout_marginLeft="150dp"
         android:layout_marginTop="18dp"
         android:text="Register instead"
         android:textColor="?android:attr/colorForeground"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/btn_llogin" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_Llogin" />
 
 </RelativeLayout>
