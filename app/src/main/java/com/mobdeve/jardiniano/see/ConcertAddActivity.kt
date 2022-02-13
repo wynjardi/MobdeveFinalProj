@@ -82,7 +82,7 @@ class ConcertAddActivity : AppCompatActivity() {
         }
         else if(category.isEmpty()){
             Toast.makeText(this, "Pick Category", Toast.LENGTH_SHORT).show()
-        }
+        } //uploadChuchuToStorage()
     }
 
     //private fun uploadChuchuToStorage(){}
