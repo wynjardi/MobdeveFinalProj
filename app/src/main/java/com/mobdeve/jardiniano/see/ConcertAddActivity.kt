@@ -91,9 +91,9 @@ class ConcertAddActivity : AppCompatActivity() {
 
 
     private fun validateData(){
-            //get data for name artist and categ
-        concertname = binding.concertTitleFill.toString().trim()
-        concertartist= binding.concertArtistNameFill.toString().trim()
+        //get data for name artist and categ
+        concertname = binding.concertTitle.text.toString().trim()
+        concertartist= binding.concertArtistName.text.toString().trim()
         category = binding.categoryTv.text.toString().trim()
 
         if (concertname.isEmpty()){
@@ -105,8 +105,8 @@ class ConcertAddActivity : AppCompatActivity() {
         }
         else if(category.isEmpty()){
             Toast.makeText(this, "Pick Category", Toast.LENGTH_SHORT).show()
-        }
-        uploadImageToStorage()
+        } else{
+        uploadImageToStorage()}
     }
 
 //    private fun uploadPicToStorage(){
@@ -173,7 +173,7 @@ class ConcertAddActivity : AppCompatActivity() {
                 binding.categoryTv.text= selectedCategoryTitle
 
                 Log.d(TAG, "Selected Categ Id: $selectedCategoryId")
-                Log.d(TAG, "Selected Categ Id: $selectedCategoryTitle")
+                Log.d(TAG, "Selected Categ Title: $selectedCategoryTitle")
 
 
             }
@@ -240,7 +240,7 @@ class ConcertAddActivity : AppCompatActivity() {
         data["category id"] = "$selectedCategoryId"
         data["timestamp"] = timestamp
 
-        val ref = FirebaseDatabase.getInstance().getReference("Concert Details")
+        val ref = FirebaseDatabase.getInstance().getReference("Concerts")
         //add firebase db to CAtegories > categoryID > categ info
         ref.child("$timestamp")
             .setValue(data)
