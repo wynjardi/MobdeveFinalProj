@@ -108,16 +108,40 @@
 
         />
 
-    //upload
+
+
+<!--    <Button-->
+<!--        android:id="@+id/uploadImgBtn"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+
+<!--        android:layout_below="@+id/categoryTv"-->
+<!--        android:layout_marginStart="30dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginEnd="30dp"-->
+<!--        android:text="Upload Concert Image" />-->
+
     <Button
-        android:id="@+id/submitBtn"
+        android:id="@+id/chooseImgBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/categoryTv"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
         android:layout_marginTop="10dp"
-        android:text="Add concert"/>
+        android:layout_marginEnd="30dp"
+        android:text="Choose Concert Image" />
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chooseImgBtn"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:text="Add concert" />
+
+
 
 
 
