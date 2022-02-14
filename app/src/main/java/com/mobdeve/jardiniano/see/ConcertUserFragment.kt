@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener
 import com.mobdeve.jardiniano.see.databinding.FragmentConcertUserBinding
 import java.lang.Exception
 
-class ConcertUserFragment : Fragment() {
+class ConcertUserFragment : Fragment {
 
     private lateinit var binding: FragmentConcertUserBinding
 
@@ -38,6 +38,7 @@ class ConcertUserFragment : Fragment() {
 
     private var categoryId = ""
     private var category = ""
+    private var uid = ""
 
     private lateinit var concertArrayList: ArrayList<ModelConcert>
     private lateinit var adapterConcertUser: AdapterConcertUser
@@ -51,6 +52,7 @@ class ConcertUserFragment : Fragment() {
         if (args != null){
             categoryId = args.getString("categoryId")!!
             category = args.getString("category")!!
+            uid = args.getString("uid")!!
         }
     }
 
@@ -61,7 +63,7 @@ class ConcertUserFragment : Fragment() {
         //load concert according to category
         Log.d(TAG, "onCreateView: Category: $category")
         if (category == "All"){
-            //load all books
+            //load all concerts
             loadAllConcerts()
         }
 
@@ -83,7 +85,7 @@ class ConcertUserFragment : Fragment() {
                }
 
                catch (e: Exception){
-                   Log.d(TAG, "onTextChanged: Search Exceptiob: ${e.message}")
+                   Log.d(TAG, "onTextChanged: Search Exception: ${e.message}")
 
                }               }
 
