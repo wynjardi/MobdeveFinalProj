@@ -24,6 +24,8 @@
 
         <TextView
             android:id="@+id/subTitleTv"
+            android:layout_below="@+id/TitleTv"
+            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="insert user's name here dapat i think"
