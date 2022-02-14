@@ -89,6 +89,7 @@ class AdapterConcertUser: RecyclerView.Adapter<AdapterConcertUser.HolderConcertU
         if (filter == null){
             filter = FilterConcertUser(filterList, this)
         }
+
         return filter as FilterConcertUser
     }
 
