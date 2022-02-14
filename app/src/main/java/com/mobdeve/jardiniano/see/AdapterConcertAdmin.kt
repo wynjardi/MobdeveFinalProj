@@ -43,7 +43,7 @@ class AdapterConcertAdmin :RecyclerView.Adapter<AdapterConcertAdmin.HolderImgAdm
 
 
         val model = imgArrayList[position]
-        val imgId = model.id
+        val concertId = model.id
         val categoryId = model.categoryId
         val concertTitle = model.concertName
         val concertArtistName= model.concertArtist
@@ -69,6 +69,14 @@ class AdapterConcertAdmin :RecyclerView.Adapter<AdapterConcertAdmin.HolderImgAdm
         //show dialog
         holder.moreBtn.setOnClickListener{
             moreOptionsDialog(model, holder)
+        }
+
+        //handle open concert details
+
+        holder.itemView.setOnClickListener{
+            val intent = Intent(context, ConcertDetailActivity::class.java)
+            intent.putExtra("concertId", concertId)
+            context.startActivity(intent)
         }
     }
 

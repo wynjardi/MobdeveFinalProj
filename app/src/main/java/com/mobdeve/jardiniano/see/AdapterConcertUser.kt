@@ -19,10 +19,10 @@ class AdapterConcertUser: RecyclerView.Adapter<AdapterConcertUser.HolderConcertU
     //to change, arraylist to hold concerts, get using constructor
     public var concertArrayList: ArrayList<ModelConcert>
     //array list to hold filtered concerts
-    public var filterList: ArrayList<ModelConcert>
+    private var filterList: ArrayList<ModelConcert>
 
     //arraylist for holding filtered concerts
-    private var filterList: ArrayList<ModelConcert>
+//    private var filterList: ArrayList<ModelConcert>
 
     private var filter: FilterConcertUser? = null
 
@@ -52,8 +52,8 @@ class AdapterConcertUser: RecyclerView.Adapter<AdapterConcertUser.HolderConcertU
         val model = concertArrayList[position]
         val concertId = model.id
         var categoryId = model.categoryId
-        var title = model.title
-        var description = model.description
+        var title = model.concertName
+        var description = model.concertArtist
         var uid = model.uid
         var url = model.imageUrl
         var timestamp = model.timestamp
@@ -66,7 +66,7 @@ class AdapterConcertUser: RecyclerView.Adapter<AdapterConcertUser.HolderConcertU
         holder.descriptionTv.text = description
         holder.dateTv.text = date
 
-        MyApplication.loadConcertFromUrlSinglePage(url, title, null )
+        MyApplication.loadConcertFromUrlSinglePage(url , title, holder.imageView, holder.progressBar)
 
         MyApplication.loadCategory(categoryId, holder.categoryTv)
 
@@ -96,6 +96,10 @@ class AdapterConcertUser: RecyclerView.Adapter<AdapterConcertUser.HolderConcertU
     //to change, view holder of class row_concert_user.xml
     inner class HolderConcertUser(itemView: View): RecyclerView.ViewHolder(itemView){
     //init UI components of class row_concert_user.xml
+
+        //concert image
+        val imageView = binding.imageView
+
         var progressBar = binding.progressBar
         var titleTv = binding.titleTv
         var descriptionTv = binding.descriptionTv

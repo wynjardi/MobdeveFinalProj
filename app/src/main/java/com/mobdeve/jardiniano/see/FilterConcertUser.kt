@@ -1,6 +1,6 @@
 package com.mobdeve.jardiniano.see
 
-import java.util.logging.Filter
+import android.widget.Filter
 import java.util.logging.LogRecord
 
 class FilterConcertUser: Filter {
@@ -11,13 +11,18 @@ class FilterConcertUser: Filter {
     var adapterConcertUser: AdapterConcertUser
 
     //constructor
-    constructor(filterList: ArrayList<ModelConcert>, adapterConcertUser: AdapterConcertUser) {
+    constructor(filterList: ArrayList<ModelConcert>, adapterConcertUser: AdapterConcertUser) : super(){
         this.filterList = filterList
         this.adapterConcertUser = adapterConcertUser
     }
 
-    override fun isLoggable(p0: LogRecord?): Boolean {
-        TODO("Not yet implemented")
+    override fun performFiltering(p0: CharSequence?): FilterResults {
+
     }
+
+    override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+
+    }
+
 
 }

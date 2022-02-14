@@ -61,6 +61,10 @@
                     android:background="@color/black">
 
                     //concertView to change and code
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
                     //progress bar
 
