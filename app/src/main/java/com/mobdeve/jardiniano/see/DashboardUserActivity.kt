@@ -79,7 +79,7 @@ class DashboardUserActivity : AppCompatActivity(){
                 viewPagerAdapter.addFragment(
                     ConcertUserFragment.newInstance(
                         "${modelALL.id}",
-                        "${modelALL.category}",
+                        "${modelALL.category}","${modelALL.uid}"
                     ), modelALL.category
                 )
 
@@ -96,7 +96,7 @@ class DashboardUserActivity : AppCompatActivity(){
                     viewPagerAdapter.addFragment(
                             ConcertUserFragment.newInstance(
                                 "${model.id}",
-                                "${model.category}"
+                                "${model.category}","${model.uid}"
                             ), model.category
                         )
 
@@ -142,7 +142,7 @@ class DashboardUserActivity : AppCompatActivity(){
     private fun checkUser(){
         //get current user
         val firebaseUser = firebaseAuth.currentUser
-            val email = firebaseUser.email
+            val email = firebaseUser!!.email
             //set to textview of toolbar
             binding.subTitleTv.text = email
 

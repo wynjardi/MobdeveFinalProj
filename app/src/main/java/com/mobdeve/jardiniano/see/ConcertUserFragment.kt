@@ -25,12 +25,13 @@ class ConcertUserFragment : Fragment {
        private const val TAG = "CONCERT_USER_TAG"
 
         //receive data from activity to load concert details like category
-        public fun newInstance(categoryId: String, category: String): ConcertUserFragment{
+        public fun newInstance(categoryId: String, category: String, uid: String): ConcertUserFragment{
             val fragment = ConcertUserFragment()
             //put data to bundle intent
             val args = Bundle()
             args.putString("categoryId", categoryId)
             args.putString("category", category)
+            args.putString("uid", uid)
             fragment.arguments = args
             return fragment
         }
