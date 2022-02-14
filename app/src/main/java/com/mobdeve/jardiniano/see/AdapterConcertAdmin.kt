@@ -2,25 +2,34 @@ package com.mobdeve.jardiniano.see
 
 import android.content.Context
 import android.text.Layout
+import android.view.Display
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.mobdeve.jardiniano.see.databinding.RowConcertAdminBinding
 
-class AdapterConcertAdmin :RecyclerView.Adapter<AdapterConcertAdmin.HolderImgAdmin>  {
+class AdapterConcertAdmin :RecyclerView.Adapter<AdapterConcertAdmin.HolderImgAdmin>, Filterable {
 
 
     private var context: Context
 
     //arraylist to hold imgs
-    private var imgArrayList: ArrayList<ModelConcert>
-
+    public var imgArrayList: ArrayList<ModelConcert>
+    private val filterList:ArrayList<ModelConcert>
 
 
     private lateinit var binding: RowConcertAdminBinding
 
 
+    var filter: FilterConcertAdmin? = null
+    constructor(context: Context, imgArrayList: ArrayList<ModelConcert>) : super(){
+        this.context = context
+        this.imgArrayList = imgArrayList
+        this.filterList = imgArrayList
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderImgAdmin {
         binding = RowConcertAdminBinding.inflate(LayoutInflater.from(context), parent, false)
@@ -37,20 +46,42 @@ class AdapterConcertAdmin :RecyclerView.Adapter<AdapterConcertAdmin.HolderImgAdm
         val concertTitle = model.concertName
         val concertArtistName= model.concertArtist
         val imgUrl = model.imageUrl
-        val timestap = model.timestamp
+        val timestamp = model.timestamp
 
         //create timestamp to dd/MM/yyyy format
+
+        val formattedDate = MyApplication.formatTimeStamp(timestamp)
+
+        //set data
+        holder.concertTitleTv.text = concertTitle
+        holder.concertArtistNameTv.text = concertArtistName
+        holder.dateBtn.text = formattedDate
+
+        //load further details
+
+        //categ id
+        MyApplication.loadCategory(categoryId = categoryId, holder.categoryTv)
+
+        MyApplication.loadConcertFromUrlSinglePage(imgUrl , concertTitle, holder.imageView, holder.progressBar)
     }
 
     override fun getItemCount(): Int {
         return imgArrayList.size
     }
 
-    constructor(context: Context, imgArrayList: ArrayList<ModelConcert>) : super(){
-        this.context = context
-        this.imgArrayList = imgArrayList
-    }
+
     //viewholder class
+
+
+    override fun getFilter(): Filter {
+        if (filter == null){
+            filter = FilterConcertAdmin(filterList, this)
+
+        }
+
+        return filter as FilterConcertAdmin
+    }
+
     inner class HolderImgAdmin(itemView: View): RecyclerView.ViewHolder(itemView){
 
         val imageView = binding.imageView
@@ -62,6 +93,4 @@ class AdapterConcertAdmin :RecyclerView.Adapter<AdapterConcertAdmin.HolderImgAdm
         val moreBtn = binding.moreBtn
 
     }
-
-
 }
