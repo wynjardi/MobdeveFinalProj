@@ -42,7 +42,7 @@ class DashboardUserActivity : AppCompatActivity() {
         binding.tabLayout.setupWithViewPager(binding.viewPager)
 
         //handle click, log out
-        binding.logoutBtn.setOnClickListener {
+        binding.logoutbtn.setOnClickListener {
             firebaseAuth.signOut()
 
             //to change kung saan ma redirect
