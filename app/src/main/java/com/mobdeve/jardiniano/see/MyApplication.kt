@@ -1,11 +1,13 @@
 package com.mobdeve.jardiniano.see
 
 import android.app.Application
+import android.content.Context
 import android.text.format.DateFormat
 import android.util.Log
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -69,6 +71,31 @@ class MyApplication: Application() {
 
                     }
                 })
+        }
+
+        fun deleteConcert(context: Context, concertId: String, concertUrl: String, concertTitle: String){
+            val TAG= "DELETE_CONCERT_TAG"
+
+            val storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(concertUrl)
+            storageReference.delete()
+                .addOnSuccessListener {
+                    Log.d(TAG, "Deleted from storage")
+
+                    val ref = FirebaseDatabase.getInstance().getReference("Concerts")
+                    ref.child(concertId)
+                        .removeValue()
+                        .addOnSuccessListener {
+                            Toast.makeText(context, "Successfully delete from db", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e->
+                            Log.d(TAG, "Failed to delete from db due to ${e.message}")
+                            Toast.makeText(context, "Failed to delete from db due to ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
+                .addOnFailureListener { e->
+                    Log.d(TAG, "Failed to delte from storage due to ${e.message}")
+                }
+
         }
 
     }

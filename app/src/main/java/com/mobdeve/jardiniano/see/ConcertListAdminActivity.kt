@@ -44,6 +44,9 @@ class ConcertListAdminActivity : AppCompatActivity() {
         //load concerts
         loadConcertList()
 
+        binding.backBtn.setOnClickListener {
+            onBackPressed()
+        }
         //search
         binding.searchEt.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
