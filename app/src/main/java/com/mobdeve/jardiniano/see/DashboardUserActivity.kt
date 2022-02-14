@@ -77,7 +77,10 @@ class DashboardUserActivity : AppCompatActivity(){
                 //add to list
                 categoryArrayList.add(modelALL)
                 viewPagerAdapter.addFragment(
-                    ConcertUserFragment.newInstance()
+                    ConcertUserFragment.newInstance(
+                        "${modelALL.id}",
+                        "${modelALL.category}",
+                    ), modelALL.category
                 )
 
                 //refresh list
@@ -139,11 +142,10 @@ class DashboardUserActivity : AppCompatActivity(){
     private fun checkUser(){
         //get current user
         val firebaseUser = firebaseAuth.currentUser
-        if (firebaseUser == null){
             val email = firebaseUser.email
             //set to textview of toolbar
             binding.subTitleTv.text = email
-        }
+
 
 
     }
