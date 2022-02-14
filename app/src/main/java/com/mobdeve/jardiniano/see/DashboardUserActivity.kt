@@ -41,6 +41,7 @@ class DashboardUserActivity : AppCompatActivity(){
         setupWithViewPagerAdapter(binding.viewPager)
         binding.tabLayout.setupWithViewPager(binding.viewPager)
 
+        //handle click, log out
         binding.logoutBtn.setOnClickListener{
             firebaseAuth.signOut()
 
@@ -63,15 +64,15 @@ class DashboardUserActivity : AppCompatActivity(){
         val ref = FirebaseDatabase.getInstance().getReference("Categories")
         ref.addListenerForSingleValueEvent(object: ValueEventListener{
 
-            //setup adapter to view pager
-            viewPager.adapter = viewPagerAdapter
+            //to add and change setup adapter to view pager
+
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 //clear list
                 categoryArrayList.clear()
 
                 //add data to models
-                val modelALL = ModelCategory("01", "ALL", 1)
+                val modelALL = ModelCategory("01", "ALL", 1, "")
 
                 //add to list
                 categoryArrayList.add(modelALL)
@@ -130,7 +131,6 @@ class DashboardUserActivity : AppCompatActivity(){
         public fun addFragment(fragment: ConcertUserFragment, title: String){
             //add fragment and add title that will be passes as a parameter in fragmentlist
             fragmentlist.add(fragment)
-            fragmentlist.add(title)
         }
 
 

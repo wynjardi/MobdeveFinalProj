@@ -17,7 +17,9 @@ class AdapterConcertUser: RecyclerView.Adapter<AdapterConcertUser.HolderConcertU
     private var context: Context
 
     //to change, arraylist to hold concerts, get using constructor
-    private var concertArrayList: ArrayList<ModelConcert>
+    public var concertArrayList: ArrayList<ModelConcert>
+    //array list to hold filtered concerts
+    public var filterList: ArrayList<ModelConcert>
 
     //arraylist for holding filtered concerts
     private var filterList: ArrayList<ModelConcert>
@@ -49,18 +51,25 @@ class AdapterConcertUser: RecyclerView.Adapter<AdapterConcertUser.HolderConcertU
         //get data
         val model = concertArrayList[position]
         val concertId = model.id
-        var categoryId = model.categoryid
+        var categoryId = model.categoryId
         var title = model.title
         var description = model.description
         var uid = model.uid
-        var url = model.url
+        var url = model.imageUrl
         var timestamp = model.timestamp
 
-        //convert time to change val date = MyApplication.formatTimeStamp(timestamp)
+        //convert time to change
+        val date = MyApplication.formatTimeStamp(timestamp)
 
         //set data, insert code for date
         holder.titleTv.text = title
         holder.descriptionTv.text = description
+        holder.dateTv.text = date
+
+        MyApplication.loadConcertFromUrlSinglePage(url, title, null )
+
+        MyApplication.loadCategory(categoryId, holder.categoryTv)
+
 
         //handle click, opens concert details page
         holder.itemView.setOnClickListener{
@@ -91,6 +100,7 @@ class AdapterConcertUser: RecyclerView.Adapter<AdapterConcertUser.HolderConcertU
         var descriptionTv = binding.descriptionTv
         var categoryTv = binding.categoryTv
         var dateTv = binding.dateTv
+
 
     }
 
