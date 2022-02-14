@@ -2,6 +2,7 @@ package com.mobdeve.jardiniano.see
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,6 +70,14 @@ class AdapterCategory :RecyclerView.Adapter<AdapterCategory.HolderCategory>, Fil
 
                 }
                 .show()
+        }
+
+        //handle click start concert list admin act, has concert id, name, artist name
+        holder.itemView.setOnClickListener{
+            val intent = Intent(context, ConcertListAdminActivity::class.java)
+            intent.putExtra("categoryId", id)
+            intent.putExtra("category", category)
+            context.startActivity(intent)
         }
 
     }
