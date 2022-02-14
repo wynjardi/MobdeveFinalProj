@@ -235,9 +235,9 @@ class ConcertAddActivity : AppCompatActivity() {
         data["uid"] = "$uid"
         data["id"] = "$timestamp"
         data["imageUrl"] = "$uploadedImg"
-        data["concert artist"] = "$concertartist"
-        data["concert name"] = "$concertname"
-        data["category id"] = "$selectedCategoryId"
+        data["concertArtist"] = "$concertartist"
+        data["concertName"] = "$concertname"
+        data["categoryId"] = "$selectedCategoryId"
         data["timestamp"] = timestamp
 
         val ref = FirebaseDatabase.getInstance().getReference("Concerts")
