@@ -134,7 +134,7 @@ class ConcertUserFragment : Fragment() {
                     concertArrayList.clear()
                     for (ds in snapshot.children){
                         //get data
-                        val model = ds.getValue(ModelConcert::class.jaba)
+                        val model = ds.getValue(ModelConcert::class.java)
                         //add to list
                         concertArrayList.add(model!!)
                     }
