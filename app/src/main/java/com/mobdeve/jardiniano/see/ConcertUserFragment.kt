@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import com.google.android.datatransport.runtime.firebase.transport.LogEventDropped
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -24,7 +25,7 @@ class ConcertUserFragment : Fragment() {
        private const val TAG = "CONCERT_USER_TAG"
 
         //receive data from activity to load concert details like category
-        public fun newInstance(categoryId: String, category: String){
+        public fun newInstance(categoryId: String, category: String): ConcertUserFragment{
             val fragment = ConcertUserFragment()
             //put data to bundle intent
             val args = Bundle()
@@ -69,26 +70,27 @@ class ConcertUserFragment : Fragment() {
             loadCategorizedConcerts()
         }
 
-        //searcg
-        binding.searchEt.addTextChangedListener { object :TextWatcher{
+        //search
+        binding.searchEt.addTextChangedListener { object : TextWatcher{
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                try {
+               try {
                     adapterConcertUser.filter.filter(s)
-                }
-                catch (e: Exception){
-                    Log.d(TAG, "onTextChanged: Search Exception: ${e.message}")
-                }
-            }
+               }
+
+               catch (e: Exception){
+                   Log.d(TAG, "onTextChanged: Search Exceptiob: ${e.message}")
+
+               }               }
 
             override fun afterTextChanged(p0: Editable?) {
-                TODO("Not yet implemented")
+
             }
-        }}
+        } }
 
         return binding.root
     }
