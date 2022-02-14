@@ -65,4 +65,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tabLayout" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/colorPrimary"
+        app:menu="@menu/app_bar_menu"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="450dp"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:showAsAction="always"
+        android:layout_alignParentBottom="true"
+        />
 </RelativeLayout>
