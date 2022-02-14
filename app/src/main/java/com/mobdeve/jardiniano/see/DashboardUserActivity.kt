@@ -81,9 +81,11 @@ class DashboardUserActivity : AppCompatActivity(){
                         "${modelALL.category}"
                     ), modelALL.category
                 )
+
                 //refresh list
                 viewPagerAdapter.notifyDataSetChanged()
 
+                //load from firebase db
                 for (ds in snapshot.children){
                     //get data in model
                     val model = ds.getValue(ModelCategory::class.java)
@@ -92,10 +94,11 @@ class DashboardUserActivity : AppCompatActivity(){
                     //add to viewPagerAdapter
                     viewPagerAdapter.addFragment(
                             ConcertUserFragment.newInstance(
-                                "${modelALL.id}",
-                                "${modelALL.category}"
-                            ), modelALL.category
+                                "${model.id}",
+                                "${model.category}"
+                            ), model.category
                         )
+
                     //refresh list
                     viewPagerAdapter.notifyDataSetChanged()
                 }
