@@ -76,10 +76,7 @@ class DashboardUserActivity : AppCompatActivity(){
                 //add to list
                 categoryArrayList.add(modelALL)
                 viewPagerAdapter.addFragment(
-                    ConcertUserFragment.newInstance(
-                        "${modelALL.id}",
-                        "${modelALL.category}"
-                    ), modelALL.category
+                    ConcertUserFragment.newInstance()
                 )
 
                 //refresh list
