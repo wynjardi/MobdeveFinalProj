@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.mobdeve.jardiniano.see.databinding.RowConcertSubscribeBinding
@@ -43,17 +44,31 @@ class AdapterConcertSubscription : RecyclerView.Adapter<AdapterConcertSubscripti
 
     private fun loadConcertDetails(model: ModelConcert, holder: AdapterConcertSubscription.HolderConcertSubscribe) {
         val concertId = model.id
+
         val ref = FirebaseDatabase.getInstance().getReference("")
         ref.child(concertId)
-            .addListenerForSingleValueEvent(object; ValueEventListener){
+            .addListenerForSingleValueEvent(object: ValueEventListener{
                 override fun onDataChange (snapshot: DataSnapshot) {
                     //get base info
-                    val concertId = "${snapshot.child("concertId").value}"
+                    val categoryId = "${snapshot.child("categoryId").value}"
+                    val title = "${snapshot.child("concertName").value}"
+                    val description = "${snapshot.child("concertArtist").value}"
+                    val timestamp = "${snapshot.child("timestamp").value}"
+                    val url = "${snapshot.child("url").value}"
+                    val uid = "${snapshot.child("uid").value}"
 
-                    val description = "${snapshot.child("concertId").value}"
-                    val concertId = "${snapshot.child("concertId").value}"
+                    val date = MyApplication.formatTimeStamp(timestamp.toLong())
+                    MyApplication.loadCategory("$categoryId", holder.categoryTv)
+                    MyApplication.loadConcertFromUrlSinglePage("$url", "$title",holder.imageView, holder.progressBar);
+
+
+
                 }
-        }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+        })
 
     }
 
