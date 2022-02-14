@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener
 import com.mobdeve.jardiniano.see.databinding.ActivityDashboardUserBinding
 
 
-class DashboardUserActivity : AppCompatActivity(){
+class DashboardUserActivity : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityDashboardUserBinding
@@ -42,19 +42,20 @@ class DashboardUserActivity : AppCompatActivity(){
         binding.tabLayout.setupWithViewPager(binding.viewPager)
 
         //handle click, log out
-        binding.logoutBtn.setOnClickListener{
+        binding.logoutBtn.setOnClickListener {
             firebaseAuth.signOut()
 
-     //to change kung saan ma redirect
+            //to change kung saan ma redirect
             startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }
     }
 
-    private fun setupWithViewPagerAdapter(viewPager: ViewPager){
-        viewPagerAdapter = ViewPagerAdapter(supportFragmentManager,
-        FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
-        this
+    private fun setupWithViewPagerAdapter(viewPager: ViewPager) {
+        viewPagerAdapter = ViewPagerAdapter(
+            supportFragmentManager,
+            FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
+            this
         )
 
         //init list
@@ -62,7 +63,7 @@ class DashboardUserActivity : AppCompatActivity(){
 
         //load categories from db
         val ref = FirebaseDatabase.getInstance().getReference("Categories")
-        ref.addListenerForSingleValueEvent(object: ValueEventListener{
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
 
             //to add and change setup adapter to view pager
 
@@ -79,7 +80,7 @@ class DashboardUserActivity : AppCompatActivity(){
                 viewPagerAdapter.addFragment(
                     ConcertUserFragment.newInstance(
                         "${modelALL.id}",
-                        "${modelALL.category}","${modelALL.uid}"
+                        "${modelALL.category}", "${modelALL.uid}"
                     ), modelALL.category
                 )
 
@@ -87,18 +88,18 @@ class DashboardUserActivity : AppCompatActivity(){
                 viewPagerAdapter.notifyDataSetChanged()
 
                 //load from firebase db
-                for (ds in snapshot.children){
+                for (ds in snapshot.children) {
                     //get data in model
                     val model = ds.getValue(ModelCategory::class.java)
                     //add to list
                     categoryArrayList.add(model!!)
                     //add to viewPagerAdapter
                     viewPagerAdapter.addFragment(
-                            ConcertUserFragment.newInstance(
-                                "${model.id}",
-                                "${model.category}","${model.uid}"
-                            ), model.category
-                        )
+                        ConcertUserFragment.newInstance(
+                            "${model.id}",
+                            "${model.category}", "${model.uid}"
+                        ), model.category
+                    )
 
                     //refresh list
                     viewPagerAdapter.notifyDataSetChanged()
@@ -111,13 +112,15 @@ class DashboardUserActivity : AppCompatActivity(){
         })
     }
 
-    class ViewPagerAdapter(fm: FragmentManager, behavior: Int, context: Context): FragmentPagerAdapter(fm, behavior){
+    class ViewPagerAdapter(fm: FragmentManager, behavior: Int, context: Context) :
+        FragmentPagerAdapter(fm, behavior) {
 
         //holds list of fragments for new instances of some fragment in each category
         private val fragmentlist: ArrayList<ConcertUserFragment> = ArrayList()
+
         //list of titles of categories
         private val fragmentTitleList: ArrayList<String> = ArrayList()
-        private val context:Context
+        private val context: Context
 
         init {
             this.context = context
@@ -131,7 +134,7 @@ class DashboardUserActivity : AppCompatActivity(){
             return fragmentlist[position]
         }
 
-        public fun addFragment(fragment: ConcertUserFragment, title: String){
+        public fun addFragment(fragment: ConcertUserFragment, title: String) {
             //add fragment and add title that will be passes as a parameter in fragmentlist
             fragmentlist.add(fragment)
         }
@@ -139,14 +142,15 @@ class DashboardUserActivity : AppCompatActivity(){
 
     }
 
-    private fun checkUser(){
+    private fun checkUser() {
         //get current user
         val firebaseUser = firebaseAuth.currentUser
-            val email = firebaseUser!!.email
+        if (firebaseUser == null) {
+            binding.subTitleTv.text = "Not logged in"
+        } else {
+            val email = firebaseUser.email
             //set to textview of toolbar
             binding.subTitleTv.text = email
-
-
-
+        }
     }
 }
