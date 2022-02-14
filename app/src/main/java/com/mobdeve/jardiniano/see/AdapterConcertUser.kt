@@ -66,7 +66,7 @@ class AdapterConcertUser: RecyclerView.Adapter<AdapterConcertUser.HolderConcertU
         holder.itemView.setOnClickListener{
             //pass concert id in intent then get concert info
             val intent = Intent(context, ConcertDetailActivity::class.java)
-            intent.putExtra("concertId", concertId)
+            intent.putExtra("concertid", concertId)
             context.startActivity(intent)
         }
 

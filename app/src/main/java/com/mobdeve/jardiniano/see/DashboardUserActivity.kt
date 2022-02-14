@@ -66,7 +66,7 @@ class DashboardUserActivity : AppCompatActivity(){
             //setup adapter to view pager
             viewPager.adapter = viewPagerAdapter
 
-            override fun onDataChange(snapshot: DataSnapshot) {
+            overrid e fun onDataChange(snapshot: DataSnapshot) {
                 //clear list
                 categoryArrayList.clear()
 
