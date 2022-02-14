@@ -114,7 +114,7 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this,"You successfully registered with $email! Welcome to InStaged!",Toast.LENGTH_SHORT).show()
 
                 //once registered, opens concert list view
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, DashboardUserActivity::class.java))
                 finish()
             }
 
