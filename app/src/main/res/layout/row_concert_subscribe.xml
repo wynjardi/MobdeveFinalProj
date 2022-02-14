@@ -23,6 +23,10 @@
             android:layout_marginEnd="5dp"
             android:background="@color/black">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView"/>
 
             //progress bar
             <ProgressBar
