@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MobdeveFinalProject">
         <activity
+            android:name=".ConcertEditActivity"
+            android:exported="false" />
+        <activity
             android:name=".ConcertListAdminActivity"
             android:exported="false" />
         <activity

@@ -1,6 +1,8 @@
 package com.mobdeve.jardiniano.see
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.text.Layout
 import android.view.Display
 import android.view.LayoutInflater
@@ -24,7 +26,7 @@ class AdapterConcertAdmin :RecyclerView.Adapter<AdapterConcertAdmin.HolderImgAdm
     private lateinit var binding: RowConcertAdminBinding
 
 
-    var filter: FilterConcertAdmin? = null
+    private var filter: FilterConcertAdmin? = null
     constructor(context: Context, imgArrayList: ArrayList<ModelConcert>) : super(){
         this.context = context
         this.imgArrayList = imgArrayList
@@ -63,6 +65,37 @@ class AdapterConcertAdmin :RecyclerView.Adapter<AdapterConcertAdmin.HolderImgAdm
         MyApplication.loadCategory(categoryId = categoryId, holder.categoryTv)
 
         MyApplication.loadConcertFromUrlSinglePage(imgUrl , concertTitle, holder.imageView, holder.progressBar)
+
+        //show dialog
+        holder.moreBtn.setOnClickListener{
+            moreOptionsDialog(model, holder)
+        }
+    }
+
+    private fun moreOptionsDialog(model: ModelConcert, holder: AdapterConcertAdmin.HolderImgAdmin) {
+            //get id url concert name
+        val concertId = model.id
+        val concertUrl = model.imageUrl
+        val concertTitle = model.concertName
+
+        val options = arrayOf("Edit", "Delete")
+
+        //alert
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Choose Option")
+            .setItems(options){dialog, position ->
+
+            if (position == 0){
+                val intent = Intent(context, ConcertEditActivity::class.java)
+                intent.putExtra("concertId", concertId) //used to edit concert
+                context.startActivity(intent)
+            }else if(position == 1){
+                //show confirmation first
+
+                MyApplication.deleteConcert(context,concertId, concertUrl, concertTitle)
+            }
+        }
+            .show()
     }
 
     override fun getItemCount(): Int {
