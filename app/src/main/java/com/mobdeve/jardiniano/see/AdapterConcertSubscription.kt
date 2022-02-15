@@ -87,4 +87,6 @@ class AdapterConcertSubscription : RecyclerView.Adapter<AdapterConcertSubscripti
         var dateTv = binding.dateTv
     }
 
+
+
 }

@@ -20,10 +20,16 @@ import androidx.core.app.ActivityCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.gms.location.*
 import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 import com.mobdeve.jardiniano.see.databinding.ActivitySubscribelistBinding
 import java.util.*
 import java.util.jar.Manifest
+import kotlin.collections.ArrayList
 
 class SubscribelistActivity : AppCompatActivity() {
 
@@ -33,70 +39,116 @@ class SubscribelistActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySubscribelistBinding
 
+    //for database
+    private lateinit var firebaseAuth: FirebaseAuth
+
+    //
+    private lateinit var adapterConcertSubscription: AdapterConcertSubscription
+
+    // arraylist to hold concerts
+    private lateinit var concertArrayList: ArrayList<ModelConcert>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySubscribelistBinding.inflate(layoutInflater)
 
         setContentView(binding!!.root)
-        val textView = findViewById<TextView?>(R.id.my_location)
+//        val textView = findViewById<TextView?>(R.id.my_location)
+        loadSubscribeConcerts()
 
 
         NavBar(findViewById<BottomNavigationView>(R.id.bottom_nav), this, R.id.subscribeIcon)
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+//        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
-        binding!!.getLocation.setOnClickListener {
-            Log.d("Debug:",checkPermission().toString())
-            Log.d("Debug:",isLocationEnabled().toString())
-            requestPermission()
-            /* fusedLocationProviderClient.lastLocation.addOnSuccessListener{location: Location? ->
-                 textView.text = location?.latitude.toString() + "," + location?.longitude.toString()
-             }*/
-//            getLastLocation()
-        }
+//        binding!!.getLocation.setOnClickListener {
+//            Log.d("Debug:",checkPermission().toString())
+//            Log.d("Debug:",isLocationEnabled().toString())
+//            requestPermission()
+//            /* fusedLocationProviderClient.lastLocation.addOnSuccessListener{location: Location? ->
+//                 textView.text = location?.latitude.toString() + "," + location?.longitude.toString()
+//             }*/
+////            getLastLocation()
+//        }
 
     }
 
+    private fun loadSubscribeConcerts(){
 
+        //init arraylist
+        concertArrayList = ArrayList();
 
-    private fun checkPermission():Boolean{
-        if(ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
-            ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
-        ){
-            return true
-        }
+        val ref = FirebaseDatabase.getInstance().getReference("Users")
+        ref.child(firebaseAuth.uid!!).child("Subscriptions")
+            .addValueEventListener(object: ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    //clear arraylist before adding
+                    concertArrayList.clear()
+                    for (ds in snapshot.children){
+                        //get id of the concerts
+                        val concertId = "${ds.child("concertId").value}"
 
-        return false
+                        val modelConcert = ModelConcert()
+                        modelConcert.id= concertId
+
+                        concertArrayList.add(modelConcert)
+                    }
+                    //set up adapter
+                    adapterConcertSubscription = AdapterConcertSubscription(this@SubscribelistActivity, concertArrayList)
+                    //set adapter to recyclerviewr
+                    binding.subscriptionsRv.adapter = adapterConcertSubscription
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
     }
 
-    private fun requestPermission(){
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION),PERMISSION_ID
-        )
-    }
-
-    private fun isLocationEnabled():Boolean{
-
-        var locationManager: LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-    }
+}
 
 
+
+//    private fun checkPermission():Boolean{
+//        if(ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+//            ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+//        ){
+//            return true
+//        }
 //
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if(requestCode == PERMISSION_ID){
-            if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Log.d("Debug", "You have permission")
-            }
-        }
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
+//        return false
+//    }
+//
+//    private fun requestPermission(){
+//        ActivityCompat.requestPermissions(
+//            this,
+//            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION),PERMISSION_ID
+//        )
+//    }
+//
+//    private fun isLocationEnabled():Boolean{
+//
+//        var locationManager: LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+//        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+//    }
+//
+//
+////
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        if(requestCode == PERMISSION_ID){
+//            if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+//                Log.d("Debug", "You have permission")
+//            }
+//        }
+//
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//    }
 
 //    private fun getCityName(lat: Double,long: Double):String{
 //        var cityName:String = ""
@@ -154,6 +206,5 @@ class SubscribelistActivity : AppCompatActivity() {
 //        }
 //
 //    }
-}
 
 
