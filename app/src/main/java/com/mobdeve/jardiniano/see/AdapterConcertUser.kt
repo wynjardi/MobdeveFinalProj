@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.transition.Hold
 import com.mobdeve.jardiniano.see.databinding.RowConcertUserBinding
@@ -43,6 +44,7 @@ class AdapterConcertUser: RecyclerView.Adapter<AdapterConcertUser.HolderImgUser>
 
         return HolderImgUser(binding.root)
 
+
     }
 
     override fun onBindViewHolder(holder: HolderImgUser, position: Int) {
@@ -68,14 +70,14 @@ class AdapterConcertUser: RecyclerView.Adapter<AdapterConcertUser.HolderImgUser>
 
         MyApplication.loadConcertFromUrlSinglePage(imgUrl , concertTitle, holder.imageView, holder.progressBar)
 
-        MyApplication.loadCategory(categoryId = categoryId, holder.categoryTv)
+        MyApplication.loadCategory(categoryId, holder.categoryTv)
 
 
         //handle click, opens concert details page
         holder.itemView.setOnClickListener{
             //pass concert id in intent then get concert info
             val intent = Intent(context, ConcertDetailActivity::class.java)
-            intent.putExtra("concertid", concertId)
+            intent.putExtra("concertId", concertId)
             context.startActivity(intent)
         }
 

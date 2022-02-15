@@ -3,6 +3,7 @@ package com.mobdeve.jardiniano.see
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
@@ -43,6 +44,8 @@ class DashboardUserActivity : AppCompatActivity() {
         setupWithViewPagerAdapter(binding.viewPager)
         binding.tabLayout.setupWithViewPager(binding.viewPager)
 
+        Toast.makeText(this, "Dashboard with tablayout and view pager loaded", Toast.LENGTH_SHORT).show()
+
         NavBar(findViewById<BottomNavigationView>(R.id.bottom_nav), this, R.id.menuHomeIcon)
         //handle click, log out
         binding.logoutbtn.setOnClickListener {
@@ -59,6 +62,8 @@ class DashboardUserActivity : AppCompatActivity() {
             supportFragmentManager,
             FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
             this
+
+
         )
 
         //init list
@@ -108,6 +113,8 @@ class DashboardUserActivity : AppCompatActivity() {
                     //refresh list
                     viewPagerAdapter.notifyDataSetChanged()
                 }
+
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -138,16 +145,18 @@ class DashboardUserActivity : AppCompatActivity() {
             return fragmentlist[position]
         }
 
-        override fun getPageTitle(position: Int): CharSequence? {
-            return fragmentTitleList[position]
-        }
+//        override fun getPageTitle(position: Int): CharSequence {
+//            return fragmentTitleList[position]
+//        }
 
         public fun addFragment(fragment: ConcertUserFragment, title: String) {
             //add fragment and add title that will be passes as a parameter in fragmentlist
             fragmentlist.add(fragment)
             //add title
             fragmentTitleList.add(title)
+
         }
+
 
 
     }
