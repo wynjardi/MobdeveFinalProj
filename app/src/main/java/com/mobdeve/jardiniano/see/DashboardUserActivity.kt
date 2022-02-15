@@ -35,6 +35,7 @@ class DashboardUserActivity : AppCompatActivity() {
         binding = ActivityDashboardUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         //init firebase
         firebaseAuth = FirebaseAuth.getInstance()
         checkUser()
