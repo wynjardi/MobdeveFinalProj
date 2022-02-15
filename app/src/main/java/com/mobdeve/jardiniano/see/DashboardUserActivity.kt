@@ -101,7 +101,8 @@ class DashboardUserActivity : AppCompatActivity() {
                     viewPagerAdapter.addFragment(
                         ConcertUserFragment.newInstance(
                             "${model.id}",
-                            "${model.category}", "${model.uid}"
+                            "${model.category}",
+                            "${model.uid}"
                         ), model.category
                     )
 

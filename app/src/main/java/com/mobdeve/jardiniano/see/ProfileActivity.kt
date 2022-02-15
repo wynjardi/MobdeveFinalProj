@@ -24,6 +24,8 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        firebaseAuth = FirebaseAuth.getInstance()
+
         //configure action bar
         actionBar = supportActionBar!!
         actionBar.title = "Profile"
@@ -32,20 +34,6 @@ class ProfileActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         checkUser()
 
-        //handle click, logout
-        binding.btnLogout.setOnClickListener{
-            firebaseAuth.signOut()
-            checkUser()
-        }
-
-        binding!!.btnEditprofile.setOnClickListener {
-            startActivity(
-                Intent(
-                    this@ProfileActivity,
-                    EditProfile::class.java
-                )
-            )
-        }
 
         NavBar(findViewById<BottomNavigationView>(R.id.bottom_nav), this, R.id.profileIcon)
     }
@@ -56,7 +44,6 @@ class ProfileActivity : AppCompatActivity() {
             //user not null, user is logged in
             val email = firebaseUser.email
             //set to text view
-            binding.profileEmail.text = email
         }
         else{
             //user is null and not logged in

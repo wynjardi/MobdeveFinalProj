@@ -1,75 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ProfileActivity"
-    >
+    tools:context=".ProfileActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
 
     <TextView
-        android:id="@+id/profilemain"
+        android:id="@+id/toolbarTitleTv"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="20dp"
-        android:textSize="35sp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Profile"/>
+        android:text="Profile"
+        android:textAlignment="center"/>
 
-    <TextView
-        android:id="@+id/profilewelcome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profilemain"
-        android:text="You're logged in!"
-        style="@style/TextAppearance.MaterialComponents.Body1"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profilewelcome"
-        android:id="@+id/profileEmail"
-        android:text="Email here"
-        style="@style/TextAppearance.MaterialComponents.Body1"/>
-    <LinearLayout
-        android:id="@+id/btn_logout"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottom_nav"
-        android:layout_gravity="center"
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:id="@+id/profileEditBtn"
+        android:src="@drawable/ic_edit_white"
+        android:layout_marginEnd="10dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"/>
 
-        <Button
-            android:id="@+id/btn_editprofile"
-            android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit Profile"
-            android:layout_marginRight="100dp"
-            android:layout_marginLeft="40dp"/>
+    </RelativeLayout>
 
-        <Button
-            android:id="@+id/logoutbtn"
-            android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Log Out"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="165dp"
+        android:background="@drawable/profilebg"
+        android:layout_marginTop="40dp" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profileTv"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_person_gray"
+        android:scaleType="centerCrop"/>
+
+    //name
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profileTv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="Full Name"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:id="@+id/nameTv"/>
+
+    //email
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/emaiLTv"
+        android:layout_below="@+id/nameTv"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:text="email here"
+        android:textSize="12dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/detailsLl"
+        android:orientation="horizontal"
+        android:layout_below="@id/emaiLTv"
+        android:layout_marginTop="8dp">
+
 
     </LinearLayout>
-
-
-
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
@@ -83,4 +95,4 @@
         app:showAsAction="always"
         android:layout_alignParentBottom="true"
         />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
