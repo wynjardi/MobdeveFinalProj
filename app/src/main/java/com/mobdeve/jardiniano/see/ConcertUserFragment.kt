@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.google.android.datatransport.runtime.firebase.transport.LogEventDropped
 import com.google.firebase.database.DataSnapshot
@@ -55,11 +56,14 @@ class ConcertUserFragment : Fragment {
             category = args.getString("category")!!
             uid = args.getString("uid")!!
         }
+
+        Toast.makeText(context, "Concert User Fragment Loaded", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
        binding = FragmentConcertUserBinding.inflate(LayoutInflater.from(context), container, false)
+
 
         //load concert according to category
         Log.d(TAG, "onCreateView: Category: $category")
@@ -116,13 +120,16 @@ class ConcertUserFragment : Fragment {
                 adapterConcertUser = AdapterConcertUser(context!!, concertArrayList)
                 //set adapter to recycler view
                 binding.concertsRv.adapter = adapterConcertUser
+
+
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+
             }
 
         })
+
 
     }
 
@@ -149,7 +156,7 @@ class ConcertUserFragment : Fragment {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+
                 }
             })
 

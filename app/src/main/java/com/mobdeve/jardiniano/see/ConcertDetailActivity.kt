@@ -68,9 +68,9 @@ class ConcertDetailActivity : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     //get data
                     val categoryId = "${snapshot.child("categoryId").value}"
-                    val description = "${snapshot.child("description").value}"
+                    val description = "${snapshot.child("concertArtist").value}"
                     val timestamp = "${snapshot.child("timestamp").value}"
-                    val title = "${snapshot.child("title").value}"
+                    val title = "${snapshot.child("concertName").value}"
                     val uid = "${snapshot.child("uid").value}"
 
                     //format date code to change and insert
