@@ -46,7 +46,7 @@ class FilterConcertUser: Filter {
 
     override fun publishResults(constraint: CharSequence, results: FilterResults) {
         //apply filter changes
-        adapterConcertUser.concertArrayList = results.values as ArrayList<ModelConcert>
+        adapterConcertUser.imgArrayList = results.values as ArrayList<ModelConcert>
 
         //notify changes
         adapterConcertUser.notifyDataSetChanged()

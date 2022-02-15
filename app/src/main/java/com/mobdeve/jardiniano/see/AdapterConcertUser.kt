@@ -11,64 +11,64 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.transition.Hold
 import com.mobdeve.jardiniano.see.databinding.RowConcertUserBinding
 
-class AdapterConcertUser: RecyclerView.Adapter<AdapterConcertUser.HolderConcertUser>, Filterable {
+class AdapterConcertUser: RecyclerView.Adapter<AdapterConcertUser.HolderImgUser>, Filterable {
 
     //context, get  using constructor
     private var context: Context
 
     //to change, arraylist to hold concerts, get using constructor
-    public var concertArrayList: ArrayList<ModelConcert>
+    public var imgArrayList: ArrayList<ModelConcert>
     //array list to hold filtered concerts
     private var filterList: ArrayList<ModelConcert>
+
+    //viewVinding row_concert_user.xml
+    private lateinit var binding: RowConcertUserBinding
+
 
     //arraylist for holding filtered concerts
 //    private var filterList: ArrayList<ModelConcert>
 
     private var filter: FilterConcertUser? = null
 
-
-    //viewVinding row_concert_user.xml
-    private lateinit var binding: RowConcertUserBinding
-
-    constructor(context: Context, concertArrayList: ArrayList<ModelConcert>) {
+    constructor(context: Context, imgArrayList: ArrayList<ModelConcert>): super() {
         this.context = context
-        this.concertArrayList = concertArrayList
-        this.filterList = concertArrayList
+        this.imgArrayList = imgArrayList
+        this.filterList = imgArrayList
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderConcertUser {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderImgUser {
         //inflate/bind layout row_concert_pdf
         binding = RowConcertUserBinding.inflate(LayoutInflater.from(context), parent, false)
 
-        return HolderConcertUser(binding.root)
+        return HolderImgUser(binding.root)
 
     }
 
-    override fun onBindViewHolder(holder: HolderConcertUser, position: Int) {
+    override fun onBindViewHolder(holder: HolderImgUser, position: Int) {
         //gets data, sets data, handles clicks, etc
 
         //get data
-        val model = concertArrayList[position]
+        val model = imgArrayList[position]
         val concertId = model.id
         var categoryId = model.categoryId
-        var title = model.concertName
-        var description = model.concertArtist
+        var concertTitle = model.concertName
+        var concertArtistName = model.concertArtist
         var uid = model.uid
-        var url = model.imageUrl
+        var imgUrl = model.imageUrl
         var timestamp = model.timestamp
 
         //convert time to change
-        val date = MyApplication.formatTimeStamp(timestamp)
+        val formattedDate = MyApplication.formatTimeStamp(timestamp)
 
         //set data, insert code for date
-        holder.titleTv.text = title
-        holder.descriptionTv.text = description
-        holder.dateTv.text = date
+        holder.concertTitleTv.text = concertTitle
+        holder.concertArtistNameTv.text = concertArtistName
+        holder.dateBtn.text = formattedDate
 
-        MyApplication.loadConcertFromUrlSinglePage(url , title, holder.imageView, holder.progressBar)
+        MyApplication.loadConcertFromUrlSinglePage(imgUrl , concertTitle, holder.imageView, holder.progressBar)
 
-        MyApplication.loadCategory(categoryId, holder.categoryTv)
+        MyApplication.loadCategory(categoryId = categoryId, holder.categoryTv)
 
 
         //handle click, opens concert details page
@@ -82,7 +82,7 @@ class AdapterConcertUser: RecyclerView.Adapter<AdapterConcertUser.HolderConcertU
     }
 
     override fun getItemCount(): Int {
-        return concertArrayList.size //returns list size/number of records found
+        return imgArrayList.size //returns list size/number of records found
     }
 
     override fun getFilter(): Filter {
@@ -94,17 +94,16 @@ class AdapterConcertUser: RecyclerView.Adapter<AdapterConcertUser.HolderConcertU
     }
 
     //to change, view holder of class row_concert_user.xml
-    inner class HolderConcertUser(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class HolderImgUser(itemView: View): RecyclerView.ViewHolder(itemView){
     //init UI components of class row_concert_user.xml
 
         //concert image
         val imageView = binding.imageView
-
-        var progressBar = binding.progressBar
-        var titleTv = binding.titleTv
-        var descriptionTv = binding.descriptionTv
-        var categoryTv = binding.categoryTv
-        var dateTv = binding.dateTv
+        val progressBar = binding.progressBar
+        val concertTitleTv = binding.titleTv
+        val concertArtistNameTv = binding.descriptionTv
+        val categoryTv = binding.categoryTv
+        val dateBtn = binding.dateTv
 
 
     }
