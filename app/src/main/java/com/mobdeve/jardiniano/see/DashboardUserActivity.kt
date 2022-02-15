@@ -80,7 +80,8 @@ class DashboardUserActivity : AppCompatActivity() {
                 viewPagerAdapter.addFragment(
                     ConcertUserFragment.newInstance(
                         "${modelALL.id}",
-                        "${modelALL.category}", "${modelALL.uid}"
+                        "${modelALL.category}",
+                        "${modelALL.uid}"
                     ), modelALL.category
                 )
 
@@ -134,9 +135,15 @@ class DashboardUserActivity : AppCompatActivity() {
             return fragmentlist[position]
         }
 
+        override fun getPageTitle(position: Int): CharSequence? {
+            return fragmentTitleList[position]
+        }
+
         public fun addFragment(fragment: ConcertUserFragment, title: String) {
             //add fragment and add title that will be passes as a parameter in fragmentlist
             fragmentlist.add(fragment)
+            //add title
+            fragmentTitleList.add(title)
         }
 
 
