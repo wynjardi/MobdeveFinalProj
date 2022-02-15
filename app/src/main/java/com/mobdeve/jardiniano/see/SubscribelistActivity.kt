@@ -52,7 +52,8 @@ class SubscribelistActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySubscribelistBinding.inflate(layoutInflater)
 
-        setContentView(binding!!.root)
+        setContentView(binding.root)
+        firebaseAuth = FirebaseAuth.getInstance()
 //        val textView = findViewById<TextView?>(R.id.my_location)
         loadSubscribeConcerts()
 
