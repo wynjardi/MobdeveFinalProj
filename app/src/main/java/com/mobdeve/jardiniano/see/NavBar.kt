@@ -12,7 +12,7 @@ class NavBar(bottomNavigationView: BottomNavigationView, appCon: Context, navIte
 
             when (it.itemId) {
                 R.id.menuHomeIcon -> {
-                    val intent = Intent(appCon, MainActivity::class.java)
+                    val intent = Intent(appCon, DashboardUserActivity::class.java)
                     appCon.startActivity(intent)
                 }
                 R.id.profileIcon -> {
