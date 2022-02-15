@@ -67,9 +67,22 @@ class EditProfile : AppCompatActivity() {
 
         val hashMap: HashMap<String, Any> = HashMap()
         hashMap["name"] = "$name"
+
+        //update to db
+        val reference = FirebaseDatabase.getInstance().getReference("Users")
+        reference.child(firebaseAuth.uid!!)
+            .updateChildren(hashMap)
+            .addOnSuccessListener {
+                progressDialog.dismiss()
+                Toast.makeText(this, "Profile updated!", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener{e->
+                progressDialog.dismiss()
+                Toast.makeText(this,"Failed to update profile", Toast.LENGTH_SHORT).show()
+            }
     }
 
-    
+
     private fun loadUserInfo() {
         val ref = FirebaseDatabase.getInstance().getReference("Users")
         ref.child(firebaseAuth.uid!!)

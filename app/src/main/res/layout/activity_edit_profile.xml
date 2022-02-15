@@ -58,7 +58,9 @@
                     android:textColor="@color/black"
                     android:hint="Name"/>
 
+
             </com.google.android.material.textfield.TextInputLayout>
+
 
             //button update profile
 
