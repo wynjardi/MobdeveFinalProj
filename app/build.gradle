@@ -71,11 +71,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     testImplementation 'junit:junit:4.13.2'
-
-
+    implementation platform('com.google.firebase:firebase-bom:29.1.0')
+    implementation 'com.google.firebase:firebase-auth-ktx'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    implementation 'com.facebook.android:facebook-android-sdk:4.29.0'
 
 
     // Material Design Bottom Bar

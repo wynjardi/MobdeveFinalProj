@@ -16,18 +16,21 @@
         <entry key="..\:/Users/Admin/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_concert_details.xml" value="0.1661600810536981" />
         <entry key="..\:/Users/Admin/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_concert_details_taylor.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/Admin/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_concert_list.xml" value="0.1661600810536981" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_dashboard_user.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_forum.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_forum_post.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Admin/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_home.xml" value="0.1661600810536981" />
         <entry key="..\:/Users/Admin/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_login.xml" value="0.1661600810536981" />
         <entry key="..\:/Users/Admin/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_main.xml" value="0.1661600810536981" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_profile.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/Admin/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_subscribelist.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/Admin/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/item_row_concert.xml" value="0.1661600810536981" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/drawable/border_style.xml" value="0.3314814814814815" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/drawable/button_toggle.xml" value="0.221875" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/drawable/chat_icon.xml" value="0.2140625" />
-        <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/drawable/circle.xml" value="0.1365" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/drawable/home.xml" value="0.2140625" />
-        <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1365" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/drawable/ic_baseline_category_24_blue.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/drawable/ic_baseline_more_vert_24_blue.xml" value="0.2935185185185185" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/drawable/ic_baseline_title_24_blue.xml" value="0.30462962962962964" />
@@ -54,7 +57,6 @@
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_dashboard_user.xml" value="0.2" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_edit_profile.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_forum.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_forum_post.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_home.xml" value="0.22" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_login.xml" value="0.35520833333333335" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_main.xml" value="0.25" />
@@ -63,14 +65,9 @@
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_splash.xml" value="0.20572916666666666" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/activity_subscribelist.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/button_toggle.xml" value="0.20572916666666666" />
-        <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/dialog_post_add.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/fragment_concert_user.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/fragment_forum.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/fragment_profile.xml" value="0.18802083333333333" />
-        <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/item_category.xml" value="0.1890625" />
-        <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/item_comment.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/item_concert.xml" value="0.1890625" />
-        <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/item_post.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/item_row_concert.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/item_row_favorite.xml" value="0.20572916666666666" />
         <entry key="..\:/Users/Mitzi/Documents/GitHub/MobdeveFinalProj/app/src/main/res/layout/row_category.xml" value="0.20520833333333333" />
