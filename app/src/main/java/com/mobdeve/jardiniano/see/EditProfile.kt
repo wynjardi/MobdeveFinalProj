@@ -42,6 +42,9 @@ class EditProfile : AppCompatActivity() {
         binding.updateBtn.setOnClickListener{
         validatedata()
     }
+        binding.backBtn.setOnClickListener {
+            onBackPressed()
+        }
 
     }
 

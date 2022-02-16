@@ -13,6 +13,15 @@
         android:layout_height="250dp"
         android:id="@+id/toolbarRL">
 
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="BACK"
+            android:textSize="15dp" />
+
         //title
         <TextView
             android:layout_width="wrap_content"
