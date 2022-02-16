@@ -10,8 +10,8 @@
     android:background="#b0c4de">
 
     <ImageView
-        android:layout_width="100sp"
-        android:layout_height="100dp"
+        android:layout_width="300sp"
+        android:layout_height="200sp"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="130dp"
         android:layout_marginTop="50dp"
@@ -65,7 +65,7 @@
         android:layout_width="134dp"
         android:layout_height="36dp"
         android:layout_below="@id/loginpw"
-        android:layout_marginLeft="125dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:backgroundTint="#536895"
         android:paddingTop="2dp"
@@ -80,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_Llogin"
-        android:layout_marginLeft="150dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
         android:text="Register instead"
         android:textColor="?android:attr/colorForeground"

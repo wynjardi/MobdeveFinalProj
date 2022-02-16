@@ -44,6 +44,12 @@ class ProfileActivity : AppCompatActivity() {
 
         }
 
+        binding.logoutBtn.setOnClickListener{
+            firebaseAuth.signOut()
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+        }
+
 
         NavBar(findViewById<BottomNavigationView>(R.id.bottom_nav), this, R.id.profileIcon)
     }
