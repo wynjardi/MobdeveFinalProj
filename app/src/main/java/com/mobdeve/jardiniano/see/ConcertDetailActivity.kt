@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import com.mobdeve.jardiniano.see.databinding.ActivityConcertDetailBinding
 
 class ConcertDetailActivity : AppCompatActivity() {
@@ -32,6 +36,7 @@ class ConcertDetailActivity : AppCompatActivity() {
 
         //get concert id from intent
         concertId = intent.getStringExtra("concertId")!!
+        Log.i("CONCERT DETAILS", concertId)
 
         //init firebase auth
         firebaseAuth = FirebaseAuth.getInstance()
@@ -54,8 +59,8 @@ class ConcertDetailActivity : AppCompatActivity() {
                 removeFromSubscriptions()
             }
             else
-                // not in subscriptions, add it
-                    clickSubscribe()
+            // not in subscriptions, add it
+                clickSubscribe()
 
         }
     }
@@ -66,19 +71,29 @@ class ConcertDetailActivity : AppCompatActivity() {
         ref.child(concertId)
             .addListenerForSingleValueEvent(object: ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    //get data
-                    val categoryId = "${snapshot.child("categoryId").value}"
-                    val description = "${snapshot.child("concertArtist").value}"
-                    val timestamp = "${snapshot.child("timestamp").value}"
-                    val title = "${snapshot.child("concertName").value}"
-                    val uid = "${snapshot.child("uid").value}"
+                    Log.i("CONCERT DETAILS", snapshot.toString())
 
-                    //format date code to change and insert
+                    val concert = snapshot.getValue<ModelConcert>()
 
                     //set data
-                    binding.titleTv.text = title
-                    binding.descriptionTv.text = description
-                    //binding.dateTv.text = date
+                    concert?.let {
+                        Firebase.database.reference.child("Categories")
+                            .child(concert.categoryId).child("category").get()
+                            .addOnSuccessListener {
+                                binding.categoryTv.text = it.getValue<String>()
+                            }
+
+                        binding.titleTv.text = concert.concertName
+                        binding.dateTv.text = MyApplication
+                            .formatTimeStamp(concert.timestamp)
+                        binding.descriptionTv.text = concert.concertArtist
+
+                        Glide.with(binding.imageView)
+                            .load(concert.imageUrl)
+                            .centerCrop()
+                            .into(binding.imageView)
+                    }
+
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -99,7 +114,7 @@ class ConcertDetailActivity : AppCompatActivity() {
                     if (isinSubscriptions){
                         //present in subs
                         Log.d(TAG, "onDataChange: onDataChange: Available in subscriptions")
-                            //set drawable icon
+                        //set drawable icon
                         binding.subscribeBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.ic_favorite_filled_white, 0, 0)
                         binding.subscribeBtn.text = "Remove Subscription"
                     }
@@ -155,7 +170,7 @@ class ConcertDetailActivity : AppCompatActivity() {
                 Log.d(TAG, "removeFromSubscriptions: Remove from subscriptions")
                 Toast.makeText(this, "Removed from subscriptions", Toast.LENGTH_SHORT).show()
             }
-        
+
             .addOnFailureListener{ e->
                 Log.d(TAG, "removeFromSubscriptions: Failed to remove from subscriptions due to ${e.message}")
                 Toast.makeText(this, "Failed to remove from subscriptions due to ${e.message}", Toast.LENGTH_SHORT).show()

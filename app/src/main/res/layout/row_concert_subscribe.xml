@@ -56,20 +56,21 @@
             android:layout_alignParentEnd="true"
             android:padding="5dp"
             android:src="@drawable/ic_favorite_filled_white"
-            android:tint="@color/black"
+            app:tint="@color/black"
             android:background="@android:color/transparent"/>
 
         //description
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/descriptionTv"
             style="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/titleTv"
             android:layout_toEndOf="@id/concertRL"
+            android:ellipsize="end"
             android:maxLines="4"
-            android:text="The description is ..."
-            android:ellipsize="end"/>
+            android:text="Concert Artist Name" />
 
         //category
         <TextView

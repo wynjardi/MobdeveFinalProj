@@ -32,15 +32,15 @@
             android:textStyle="bold" />
 
     </RelativeLayout>
-    
+
     //content under scrollview
-    
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_below="@id/toolbarRL">
-        
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,16 +58,8 @@
                     android:layout_height="150dp"
                     android:background="@color/black">
 
-                    //concertView to change and code
                     <ImageView
                         android:id="@+id/imageView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                    //progress bar
-
-                    <ProgressBar
-                        android:id="@+id/progressBar"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
 
@@ -148,7 +140,7 @@
                 android:textColor="@color/black"/>
 
         </LinearLayout>
-        
+
     </ScrollView>
 
     <LinearLayout
