@@ -24,7 +24,7 @@ class NavBar(bottomNavigationView: BottomNavigationView, appCon: Context, navIte
                     appCon.startActivity(intent)
                 }
                 R.id.chatIcon -> {
-                    val intent = Intent(appCon, ForumActvitity::class.java)
+                    val intent = Intent(appCon, ForumActivity::class.java)
                     appCon.startActivity(intent)
                 }
             }

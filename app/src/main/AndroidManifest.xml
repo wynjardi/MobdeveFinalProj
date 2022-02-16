@@ -41,7 +41,7 @@
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ForumActvitity"
+            android:name=".ForumActivity"
             android:exported="false" />
         <activity
             android:name=".SubscribelistActivity"
