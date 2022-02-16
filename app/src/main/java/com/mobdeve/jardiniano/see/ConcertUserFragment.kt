@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.google.android.datatransport.runtime.firebase.transport.LogEventDropped
 import com.google.firebase.database.DataSnapshot
@@ -23,7 +22,7 @@ class ConcertUserFragment : Fragment {
     private lateinit var binding: FragmentConcertUserBinding
 
     public companion object{
-       private const val TAG = "CONCERT_USER_TAG"
+        private const val TAG = "CONCERT_USER_TAG"
 
         //receive data from activity to load concert details like category
         public fun newInstance(categoryId: String, category: String, uid: String): ConcertUserFragment{
@@ -56,14 +55,11 @@ class ConcertUserFragment : Fragment {
             category = args.getString("category")!!
             uid = args.getString("uid")!!
         }
-
-        Toast.makeText(context, "Concert User Fragment Loaded", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-       binding = FragmentConcertUserBinding.inflate(LayoutInflater.from(context), container, false)
-
+        binding = FragmentConcertUserBinding.inflate(LayoutInflater.from(context), container, false)
 
         //load concert according to category
         Log.d(TAG, "onCreateView: Category: $category")
@@ -78,26 +74,26 @@ class ConcertUserFragment : Fragment {
         }
 
         //search
-        binding.searchEt.addTextChangedListener { object : TextWatcher{
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
-               try {
-                    adapterConcertUser.filter.filter(s)
-               }
-
-               catch (e: Exception){
-                   Log.d(TAG, "onTextChanged: Search Exception: ${e.message}")
-
-               }               }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-        } }
+//        binding.searchEt.addTextChangedListener { object : TextWatcher{
+//
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//               try {
+//                    adapterConcertUser.filter.filter(s)
+//               }
+//
+//               catch (e: Exception){
+//                   Log.d(TAG, "onTextChanged: Search Exception: ${e.message}")
+//
+//               }               }
+//
+//            override fun afterTextChanged(p0: Editable?) {
+//
+//            }
+//        } }
 
         return binding.root
     }
@@ -117,19 +113,16 @@ class ConcertUserFragment : Fragment {
                     concertArrayList.add(model!!)
                 }
                 //setup adapter
-                adapterConcertUser = AdapterConcertUser(context!!, concertArrayList)
+//                adapterConcertUser = AdapterConcertUser(context!!, concertArrayList)
                 //set adapter to recycler view
                 binding.concertsRv.adapter = adapterConcertUser
-
-
             }
 
             override fun onCancelled(error: DatabaseError) {
-
+                TODO("Not yet implemented")
             }
 
         })
-
 
     }
 
@@ -150,13 +143,13 @@ class ConcertUserFragment : Fragment {
                     }
 
                     //setup adapter
-                    adapterConcertUser = AdapterConcertUser(context!!, concertArrayList)
+//                    adapterConcertUser = AdapterConcertUser(context!!, concertArrayList)
                     //set adapter to recycler view
                     binding.concertsRv.adapter = adapterConcertUser
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-
+                    TODO("Not yet implemented")
                 }
             })
 

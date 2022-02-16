@@ -1,7 +1,6 @@
 package com.mobdeve.jardiniano.see
 
 import android.widget.Filter
-import java.util.logging.LogRecord
 
 class FilterConcertUser: Filter {
 
@@ -46,7 +45,7 @@ class FilterConcertUser: Filter {
 
     override fun publishResults(constraint: CharSequence, results: FilterResults) {
         //apply filter changes
-        adapterConcertUser.imgArrayList = results.values as ArrayList<ModelConcert>
+        adapterConcertUser.items = results.values as ArrayList<ModelConcert>
 
         //notify changes
         adapterConcertUser.notifyDataSetChanged()
