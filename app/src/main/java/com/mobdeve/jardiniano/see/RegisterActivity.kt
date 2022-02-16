@@ -138,10 +138,10 @@ class RegisterActivity : AppCompatActivity() {
         val uid = firebaseAuth.uid
         val hashMap: HashMap<String, Any?> = HashMap()
         hashMap["uid"] = uid
+        hashMap["name"] = binding.etLname.text.toString()
         hashMap["email"] = email
         hashMap["password"] = password
         hashMap["userType"] = "user"
-
 
         //set data to db
         val ref = FirebaseDatabase.getInstance().getReference("Users")
