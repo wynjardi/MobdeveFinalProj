@@ -69,7 +69,7 @@
             android:layout_below="@id/titleTv"
             android:layout_toEndOf="@id/concertRL"
             android:maxLines="4"
-            android:text="The description is ..."
+            android:text="Concert Artist Name"
             android:ellipsize="end"/>
 
         //category

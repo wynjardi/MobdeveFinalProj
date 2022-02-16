@@ -9,6 +9,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
 import com.mobdeve.jardiniano.see.databinding.RowConcertSubscribeBinding
 
 class AdapterConcertSubscription : RecyclerView.Adapter<AdapterConcertSubscription.HolderConcertSubscribe> {
@@ -49,6 +50,13 @@ class AdapterConcertSubscription : RecyclerView.Adapter<AdapterConcertSubscripti
         ref.child(concertId)
             .addListenerForSingleValueEvent(object: ValueEventListener{
                 override fun onDataChange (snapshot: DataSnapshot) {
+                    val concert = snapshot.getValue<ModelConcert>()
+
+                    concert?.let {
+                        MyApplication.loadCategory(it.categoryId, holder.categoryTv)
+                        MyApplication.loadConcertFromUrlSinglePage(it.imageUrl, it.concertName, holder.imageView, holder.progressBar);
+                    }
+
                     //get base info
                     val categoryId = "${snapshot.child("categoryId").value}"
                     val title = "${snapshot.child("concertName").value}"
@@ -57,9 +65,6 @@ class AdapterConcertSubscription : RecyclerView.Adapter<AdapterConcertSubscripti
                     val url = "${snapshot.child("url").value}"
                     val uid = "${snapshot.child("uid").value}"
 
-                    val date = MyApplication.formatTimeStamp(timestamp.toLong())
-                    MyApplication.loadCategory("$categoryId", holder.categoryTv)
-                    MyApplication.loadConcertFromUrlSinglePage("$url", "$title",holder.imageView, holder.progressBar);
 
 
 
@@ -68,7 +73,7 @@ class AdapterConcertSubscription : RecyclerView.Adapter<AdapterConcertSubscripti
                 override fun onCancelled(error: DatabaseError) {
 
                 }
-        })
+            })
 
     }
 
