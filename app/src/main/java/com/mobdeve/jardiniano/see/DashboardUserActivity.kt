@@ -1,176 +1,90 @@
 package com.mobdeve.jardiniano.see
 
-import android.content.Context
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.Toast
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil.setContentView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import com.mobdeve.jardiniano.see.databinding.ActivityDashboardUserBinding
 
-
+@SuppressLint("NotifyDataSetChanged")
 class DashboardUserActivity : AppCompatActivity() {
 
-
     private lateinit var binding: ActivityDashboardUserBinding
-
-    //firebase
-    private lateinit var firebaseAuth: FirebaseAuth
-
-    private lateinit var categoryArrayList: ArrayList<ModelCategory>
-    private lateinit var viewPagerAdapter: ViewPagerAdapter
+    private lateinit var database: DatabaseReference
+    private lateinit var categoryAdapter: UserCategoryAdapter
+    private lateinit var concertAdapter: UserConcertAdapter
+    private var concertItems = arrayListOf<ModelConcert>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDashboardUserBinding.inflate(layoutInflater)
+        database = Firebase.database.reference
         setContentView(binding.root)
 
-
-        //init firebase
-        firebaseAuth = FirebaseAuth.getInstance()
-        checkUser()
-
-        setupWithViewPagerAdapter(binding.viewPager)
-        binding.tabLayout.setupWithViewPager(binding.viewPager)
-
-        Toast.makeText(this, "Dashboard with tablayout and view pager loaded", Toast.LENGTH_SHORT).show()
-
-        NavBar(findViewById<BottomNavigationView>(R.id.bottom_nav), this, R.id.menuHomeIcon)
-        //handle click, log out
-        binding.logoutbtn.setOnClickListener {
-            firebaseAuth.signOut()
-
-            //to change kung saan ma redirect
-            startActivity(Intent(this, HomeActivity::class.java))
-            finish()
+        categoryAdapter = UserCategoryAdapter(this)
+        with(binding.categoryRecyclerView) {
+            layoutManager = LinearLayoutManager(
+                context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = categoryAdapter
         }
-    }
 
-    private fun setupWithViewPagerAdapter(viewPager: ViewPager) {
-        viewPagerAdapter = ViewPagerAdapter(
-            supportFragmentManager,
-            FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
-            this
-
-
-        )
-
-        //init list
-        categoryArrayList = ArrayList()
-
-        //load categories from db
-        val ref = FirebaseDatabase.getInstance().getReference("Categories")
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
-
-            //to add and change setup adapter to view pager
-
-
+        val categoryListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                //clear list
-                categoryArrayList.clear()
-
-                //add data to models
-                val modelALL = ModelCategory("01", "ALL", 1, "")
-
-                //add to list
-                categoryArrayList.add(modelALL)
-                viewPagerAdapter.addFragment(
-                    ConcertUserFragment.newInstance(
-                        "${modelALL.id}",
-                        "${modelALL.category}",
-                        "${modelALL.uid}"
-                    ), modelALL.category
-                )
-
-                //refresh list
-                viewPagerAdapter.notifyDataSetChanged()
-
-                //load from firebase db
-                for (ds in snapshot.children) {
-                    //get data in model
-                    val model = ds.getValue(ModelCategory::class.java)
-                    //add to list
-                    categoryArrayList.add(model!!)
-                    //add to viewPagerAdapter
-                    viewPagerAdapter.addFragment(
-                        ConcertUserFragment.newInstance(
-                            "${model.id}",
-                            "${model.category}",
-                            "${model.uid}"
-                        ), model.category
-                    )
-
-                    //refresh list
-                    viewPagerAdapter.notifyDataSetChanged()
+                val categories = arrayListOf<ModelCategory>()
+                for (data in snapshot.children) {
+                    val category = data.getValue<ModelCategory>()
+                    if (category != null)
+                        categories.add(category)
                 }
-
-
+                categoryAdapter.items = categories
+                categoryAdapter.notifyDataSetChanged()
             }
-
             override fun onCancelled(error: DatabaseError) {
-
+                Log.w("DASHBOARD", "loadCategory:onCancelled")
             }
-        })
-    }
+        }
+        database.child("Categories")
+            .addValueEventListener(categoryListener)
 
-    class ViewPagerAdapter(fm: FragmentManager, behavior: Int, context: Context) :
-        FragmentPagerAdapter(fm, behavior) {
-
-        //holds list of fragments for new instances of some fragment in each category
-        private val fragmentlist: ArrayList<ConcertUserFragment> = ArrayList()
-
-        //list of titles of categories
-        private val fragmentTitleList: ArrayList<String> = ArrayList()
-        private val context: Context
-
-        init {
-            this.context = context
+        concertAdapter = UserConcertAdapter(this)
+        with(binding.concertRecyclerView) {
+            layoutManager = LinearLayoutManager(
+                context, LinearLayoutManager.VERTICAL, false)
+            adapter = concertAdapter
         }
 
-        override fun getCount(): Int {
-            return fragmentlist.size
+        val concertListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (data in snapshot.children) {
+                    val concert = data.getValue<ModelConcert>()
+                    if (concert != null)
+                        concertItems.add(concert)
+                }
+                concertAdapter.items = concertItems
+                concertAdapter.notifyDataSetChanged()
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Log.w("DASHBOARD", "loadCategory:onCancelled")
+            }
         }
-
-        override fun getItem(position: Int): Fragment {
-            return fragmentlist[position]
-        }
-
-//        override fun getPageTitle(position: Int): CharSequence {
-//            return fragmentTitleList[position]
-//        }
-
-        public fun addFragment(fragment: ConcertUserFragment, title: String) {
-            //add fragment and add title that will be passes as a parameter in fragmentlist
-            fragmentlist.add(fragment)
-            //add title
-            fragmentTitleList.add(title)
-
-        }
-
-
+        database.child("Concerts")
+            .addValueEventListener(concertListener)
 
     }
 
-    private fun checkUser() {
-        //get current user
-        val firebaseUser = firebaseAuth.currentUser
-        if (firebaseUser == null) {
-            binding.subTitleTv.text = "Not logged in"
-        } else {
-            val email = firebaseUser.email
-            //set to textview of toolbar
-            binding.subTitleTv.text = email
+
+    fun filterByCategory(id: String) {
+        concertAdapter.items = concertItems.filter {
+            it.categoryId == id
         }
+        concertAdapter.notifyDataSetChanged()
     }
 }
