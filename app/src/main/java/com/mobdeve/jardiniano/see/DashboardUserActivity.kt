@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -78,6 +79,7 @@ class DashboardUserActivity : AppCompatActivity() {
         database.child("Concerts")
             .addValueEventListener(concertListener)
 
+        NavBar(findViewById<BottomNavigationView>(R.id.bottom_nav), this, R.id.menuHomeIcon)
     }
 
 
