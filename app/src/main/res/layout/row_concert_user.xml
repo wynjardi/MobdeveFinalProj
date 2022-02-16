@@ -33,7 +33,7 @@
 
         </RelativeLayout>
 
-     // concert title
+        // concert title
 
         <TextView
             android:id="@+id/titleTv"

@@ -44,6 +44,9 @@
             android:name=".ForumActivity"
             android:exported="false" />
         <activity
+            android:name=".ConcertDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".SubscribelistActivity"
             android:exported="false" />
         <activity

@@ -49,28 +49,28 @@
             android:text="Concert Title"/>
 
         //button remove from subs
+
         <ImageButton
+            android:id="@+id/removeSubBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/removeSubBtn"
             android:layout_alignParentEnd="true"
+            android:background="@android:color/transparent"
             android:padding="5dp"
             android:src="@drawable/ic_favorite_filled_white"
-            app:tint="@color/black"
-            android:background="@android:color/transparent"/>
+            app:tint="@color/black" />
 
         //description
-
         <TextView
-            android:id="@+id/descriptionTv"
-            style="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/descriptionTv"
+            style="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_below="@id/titleTv"
             android:layout_toEndOf="@id/concertRL"
-            android:ellipsize="end"
             android:maxLines="4"
-            android:text="Concert Artist Name" />
+            android:text="The description is ..."
+            android:ellipsize="end"/>
 
         //category
         <TextView

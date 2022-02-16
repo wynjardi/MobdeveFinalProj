@@ -1,11 +1,13 @@
 package com.mobdeve.jardiniano.see
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
@@ -15,6 +17,7 @@ class UserConcertAdapter(private val context: Context):
     var items: List<ModelConcert> = listOf()
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+        val card: CardView = view.findViewById(R.id.card_view)
         val image: ImageView = view.findViewById(R.id.concert_image)
         val name: TextView = view.findViewById(R.id.concert_name_text)
         val artist: TextView = view.findViewById(R.id.concert_artist_text)
@@ -38,6 +41,12 @@ class UserConcertAdapter(private val context: Context):
         holder.artist.text = item.concertArtist
         holder.date.text = MyApplication
             .formatTimeStamp(item.timestamp)
+
+        holder.card.setOnClickListener {
+            val intent = Intent(context, ConcertDetailActivity::class.java)
+            intent.putExtra("concertId", item.id)
+            context.startActivity(intent)
+        }
 
     }
 
