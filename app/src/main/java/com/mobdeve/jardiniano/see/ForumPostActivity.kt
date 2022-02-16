@@ -92,5 +92,9 @@ class ForumPostActivity : AppCompatActivity() {
 
         }
 
+        binding.backBtn.setOnClickListener {
+            onBackPressed()
+        }
+
     }
 }
