@@ -9,37 +9,41 @@
     tools:context=".Login"
     android:background="#b0c4de">
 
-    <ImageView
-        android:id="@+id/ouricon"
-        android:layout_width="100sp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/ouricon" />
     <TextView
         android:id="@+id/InstagedTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="Instaged"
+        android:layout_above="@+id/ourIcon"
         style="@style/TextAppearance.MaterialComponents.Headline4"/>
+
+    <ImageView
+        android:id="@+id/ourIcon"
+        android:layout_width="300sp"
+        android:layout_height="200sp"
+        android:layout_above="@+id/loginname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="130dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ouricon" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/loginname"
         android:layout_marginBottom="10dp"
-        android:layout_above="@id/loginemail"
-        android:layout_below="@id/ouricon"/>
+        android:layout_above="@id/loginemail"/>
 
     <EditText
+        android:id="@+id/et_lname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="190dp"
-        android:id="@+id/et_lname"
+        android:layout_above="@id/loginemail"
+
         android:hint="Full Name (First Name, Last Name)"
-        android:inputType="textPersonName"/>
+        android:inputType="textPersonName" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -76,29 +80,29 @@
 
     <Button
         android:id="@+id/btn_register"
-        android:backgroundTint="#536895"
         android:layout_width="134dp"
         android:layout_height="36dp"
-        android:layout_marginLeft="125dp"
         android:layout_below="@id/loginpw"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:backgroundTint="#536895"
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
         android:text="Register"
         android:textColor="?android:attr/colorForeground"
         android:textStyle="bold"
-        app:backgroundTint="?android:attr/colorForeground"/>
+        app:backgroundTint="?android:attr/colorForeground" />
 
     <TextView
         android:id="@+id/logreg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
-        android:layout_marginLeft="150dp"
+        android:layout_centerHorizontal="true"
         android:text="Login instead"
         android:layout_below="@id/btn_register"
         android:textColor="?android:attr/colorForeground"
-        android:textSize="12sp"
+        android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/btn_register" />
 

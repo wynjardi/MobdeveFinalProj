@@ -9,23 +9,27 @@
     tools:context=".Login"
     android:background="#b0c4de">
 
-    <ImageView
-        android:layout_width="300sp"
-        android:layout_height="200sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="50dp"
-
-        android:src="@drawable/ouricon" />
-
-
     <TextView
         android:id="@+id/InstagedTitle"
         style="@style/TextAppearance.MaterialComponents.Headline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@id/ourIcon"
         android:layout_centerHorizontal="true"
         android:text="Instaged" />
+
+    <ImageView
+        android:id="@+id/ourIcon"
+        android:layout_width="300sp"
+        android:layout_height="200sp"
+        android:layout_above="@+id/loginemail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="130dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ouricon" />
+
+
+
 
 <com.google.android.material.textfield.TextInputLayout
     android:layout_width="match_parent"
@@ -71,6 +75,7 @@
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
         android:text="Login"
+
         android:textColor="?android:attr/colorForeground"
         android:textStyle="bold"
         app:backgroundTint="?android:attr/colorForeground" />
@@ -84,7 +89,7 @@
         android:layout_marginTop="18dp"
         android:text="Register instead"
         android:textColor="?android:attr/colorForeground"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/btn_Llogin" />
 
