@@ -64,22 +64,28 @@
         android:textSize="12dp"/>
 
     <LinearLayout
+        android:id="@+id/detailsLl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/detailsLl"
-        android:orientation="horizontal"
         android:layout_below="@id/emaiLTv"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
 
         <Button
+            android:id="@+id/profileEditBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/profileEditBtn"
             android:layout_below="@+id/nameTil"
-            android:text="Edit Profile"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:text="Edit Profile" />
 
-
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profileEditBtn"
+            android:layout_marginTop="20dp"
+            android:text="Logout" />
 
 
     </LinearLayout>

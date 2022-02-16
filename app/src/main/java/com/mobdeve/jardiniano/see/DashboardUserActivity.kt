@@ -1,6 +1,7 @@
 package com.mobdeve.jardiniano.see
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -78,6 +79,8 @@ class DashboardUserActivity : AppCompatActivity() {
         }
         database.child("Concerts")
             .addValueEventListener(concertListener)
+
+
 
         NavBar(findViewById<BottomNavigationView>(R.id.bottom_nav), this, R.id.menuHomeIcon)
     }
