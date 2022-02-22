@@ -70,13 +70,16 @@ class Login : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         callbackManager = CallbackManager.Factory.create()
 
+        printKeyHash()
+
         binding!!.fbBtn.setReadPermissions("email")
         binding!!.fbBtn.setOnClickListener {
             signIn()
+            validateData()
 
         }
 
-        printKeyHash()
+
 
         //handle click, open reg
         binding.logreg.setOnClickListener{
@@ -96,14 +99,36 @@ class Login : AppCompatActivity() {
             override fun onSuccess(result: LoginResult?) {
 
                 handleFacebookAccessToken(result!!.accessToken)
+
+                //to store fb user's email uid and usertype
+                val uid = firebaseAuth.uid
+                val hashMap: HashMap<String, Any?> = HashMap()
+                hashMap["uid"] = uid
+                hashMap["email"] = email
+                hashMap["password"] = password
+                hashMap["userType"] = "user"
+
+                //set data to db
+                val ref = FirebaseDatabase.getInstance().getReference("Users")
+                ref.child(uid!!)
+                    .setValue(hashMap)
+                    .addOnSuccessListener {
+                        startActivity(Intent(this@Login, DashboardUserActivity::class.java))
+                        finish()
+                    }
+                    .addOnFailureListener{e->
+
+                    }
+
+
             }
 
             override fun onCancel() {
-                TODO("Not yet implemented")
+
             }
 
             override fun onError(error: FacebookException?) {
-                TODO("Not yet implemented")
+
             }
 
         })
@@ -118,7 +143,8 @@ class Login : AppCompatActivity() {
             }
             .addOnSuccessListener { result ->
                 val email = result.user!!.email
-                Toast.makeText(this, "You logged with email: " + email,Toast.LENGTH_SHORT).show()
+                val user = firebaseAuth.currentUser
+                Toast.makeText(this, "You logged in with email: " + email,Toast.LENGTH_SHORT).show()
 
             }
     }
@@ -136,6 +162,7 @@ class Login : AppCompatActivity() {
                 val md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray())
                 Log.d("KEYHASH", Base64.encodeToString(md.digest(), Base64.DEFAULT))
+
             }
 
 
@@ -147,6 +174,9 @@ class Login : AppCompatActivity() {
 
         }
     }
+
+
+
 
     private fun validateData(){
         //get data
