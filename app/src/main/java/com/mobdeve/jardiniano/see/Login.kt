@@ -6,12 +6,20 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Base64
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -19,6 +27,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.mobdeve.jardiniano.see.databinding.ActivityLoginBinding
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 
 class Login : AppCompatActivity() {
@@ -36,6 +46,7 @@ class Login : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private var email = ""
     private var password = ""
+    var callbackManager: CallbackManager?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +66,17 @@ class Login : AppCompatActivity() {
         //init firebaseAuth
         firebaseAuth = FirebaseAuth.getInstance()
 
+        //fb login api
+        firebaseAuth = FirebaseAuth.getInstance()
+        callbackManager = CallbackManager.Factory.create()
+
+        binding!!.fbBtn.setReadPermissions("email")
+        binding!!.fbBtn.setOnClickListener {
+            signIn()
+
+        }
+
+        printKeyHash()
 
         //handle click, open reg
         binding.logreg.setOnClickListener{
@@ -66,6 +88,63 @@ class Login : AppCompatActivity() {
 
             //before loggin in, validate data
             validateData()
+        }
+    }
+
+    private fun signIn() {
+        binding!!.fbBtn.registerCallback(callbackManager, object: FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult?) {
+
+                handleFacebookAccessToken(result!!.accessToken)
+            }
+
+            override fun onCancel() {
+                TODO("Not yet implemented")
+            }
+
+            override fun onError(error: FacebookException?) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun handleFacebookAccessToken(accessToken: AccessToken) {
+        //get credential
+        val credential = FacebookAuthProvider.getCredential(accessToken!!.token)
+        firebaseAuth!!.signInWithCredential(credential)
+            .addOnFailureListener{ e->
+                Toast.makeText(this, e.message,Toast.LENGTH_SHORT).show()
+            }
+            .addOnSuccessListener { result ->
+                val email = result.user!!.email
+                Toast.makeText(this, "You logged with email: " + email,Toast.LENGTH_SHORT).show()
+
+            }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        callbackManager!!.onActivityResult(requestCode,resultCode,data)
+    }
+
+    private fun printKeyHash() {
+        try {
+            val info = packageManager.getPackageInfo("com.mobdeve.jardiniano.see", PackageManager.GET_SIGNATURES)
+            for (signature in info.signatures)
+            {
+                val md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray())
+                Log.d("KEYHASH", Base64.encodeToString(md.digest(), Base64.DEFAULT))
+            }
+
+
+        }
+        catch (e: PackageManager.NameNotFoundException){
+
+        }
+        catch (e: NoSuchAlgorithmException){
+
         }
     }
 
@@ -127,7 +206,7 @@ class Login : AppCompatActivity() {
                     val userType = snapshot.child("userType").value
                     if (userType == "user"){
                         startActivity(Intent(this@Login, DashboardUserActivity::class.java))
-                            finish()
+                        finish()
                     }
                     else if (userType == "admin"){
                         startActivity(Intent(this@Login, DashboardAdminActivity::class.java))

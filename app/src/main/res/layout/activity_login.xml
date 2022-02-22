@@ -31,21 +31,21 @@
 
 
 
-<com.google.android.material.textfield.TextInputLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/loginemail"
-    android:layout_marginBottom="10dp"
-    android:layout_above="@id/loginpw">
-
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/et_lemail"
-        android:hint="Email"
-        android:inputType="textEmailAddress"/>
+        android:id="@+id/loginemail"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@id/loginpw">
 
-</com.google.android.material.textfield.TextInputLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_lemail"
+            android:hint="Email"
+            android:inputType="textEmailAddress"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -92,5 +92,15 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/btn_Llogin" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/fbBtn"
+        android:layout_below ="@id/logreg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp" />
 
 </RelativeLayout>
