@@ -98,7 +98,7 @@ class Login : AppCompatActivity() {
 
                 handleFacebookAccessToken(result!!.accessToken)
 
-                if(firebaseAuth.currentUser == null) {
+
                     val uid = firebaseAuth.uid
                     val hashMap: HashMap<String, Any?> = HashMap()
                     hashMap["uid"] = uid
@@ -116,7 +116,7 @@ class Login : AppCompatActivity() {
                         .addOnFailureListener { e ->
                             LoginManager.getInstance().logOut()
                         }
-                }
+
 
             }
 
