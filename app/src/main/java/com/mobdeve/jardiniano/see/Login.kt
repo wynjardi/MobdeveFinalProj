@@ -67,7 +67,7 @@ class Login : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         //fb login api
-        firebaseAuth = FirebaseAuth.getInstance()
+
         callbackManager = CallbackManager.Factory.create()
 
         printKeyHash()
@@ -75,6 +75,7 @@ class Login : AppCompatActivity() {
         binding!!.fbBtn.setReadPermissions("email")
         binding!!.fbBtn.setOnClickListener {
             signIn()
+            checkUser()
         }
 
 
@@ -98,24 +99,24 @@ class Login : AppCompatActivity() {
 
                 handleFacebookAccessToken(result!!.accessToken)
 
-//                val uid = firebaseAuth.uid
-//                val hashMap: HashMap<String, Any?> = HashMap()
-//                hashMap["uid"] = uid
-//                hashMap["email"] = email
-//                hashMap["password"] = password
-//                hashMap["userType"] = "user"
-//
-//                //set data to db
-//                val ref = FirebaseDatabase.getInstance().getReference("Users")
-//                ref.child(uid!!)
-//                    .setValue(hashMap)
-//                    .addOnSuccessListener {
+                val uid = firebaseAuth.uid
+                val hashMap: HashMap<String, Any?> = HashMap()
+                hashMap["uid"] = uid
+                hashMap["email"] = email
+                hashMap["password"] = password
+                hashMap["userType"] = "user"
+
+                //set data to db
+                val ref = FirebaseDatabase.getInstance().getReference("Users")
+                ref.child(uid!!)
+                    .setValue(hashMap)
+                    .addOnSuccessListener {
 //                        startActivity(Intent(this@Login, DashboardUserActivity::class.java))
 //                        finish()
-//                    }
-//                    .addOnFailureListener{e->
-//
-//                    }
+                    }
+                    .addOnFailureListener{e->
+
+                    }
 
 
             }
