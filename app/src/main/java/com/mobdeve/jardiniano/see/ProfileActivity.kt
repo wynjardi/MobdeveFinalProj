@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import com.facebook.login.LoginManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -46,6 +47,7 @@ class ProfileActivity : AppCompatActivity() {
 
         binding.logoutBtn.setOnClickListener{
             firebaseAuth.signOut()
+            LoginManager.getInstance().logOut()
             startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }

@@ -1,6 +1,5 @@
 package com.mobdeve.jardiniano.see
 
-import android.Manifest
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -9,15 +8,14 @@ import android.text.TextUtils
 import android.util.Base64
 import android.util.Log
 import android.util.Patterns
-import android.view.View
-import android.widget.*
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
+import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -25,7 +23,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
 import com.mobdeve.jardiniano.see.databinding.ActivityLoginBinding
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
@@ -48,6 +45,7 @@ class Login : AppCompatActivity() {
     private var password = ""
     var callbackManager: CallbackManager?=null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -56,6 +54,7 @@ class Login : AppCompatActivity() {
         //configure actionbar
         actionBar = supportActionBar!!
         actionBar.title="Login"
+
 
         //configure progress dialog
         progressDialog = ProgressDialog(this)
@@ -75,10 +74,8 @@ class Login : AppCompatActivity() {
         binding!!.fbBtn.setReadPermissions("email")
         binding!!.fbBtn.setOnClickListener {
             signIn()
-            checkUser()
+
         }
-
-
 
         //handle click, open reg
         binding.logreg.setOnClickListener{
@@ -87,11 +84,13 @@ class Login : AppCompatActivity() {
 
         //handle click, begin login
         binding.btnLlogin.setOnClickListener{
-
             //before loggin in, validate data
             validateData()
+
         }
     }
+
+
 
     private fun signIn() {
         binding!!.fbBtn.registerCallback(callbackManager, object: FacebookCallback<LoginResult> {
@@ -99,27 +98,28 @@ class Login : AppCompatActivity() {
 
                 handleFacebookAccessToken(result!!.accessToken)
 
-                val uid = firebaseAuth.uid
-                val hashMap: HashMap<String, Any?> = HashMap()
-                hashMap["uid"] = uid
-                hashMap["email"] = email
-                hashMap["password"] = password
-                hashMap["userType"] = "user"
+                if(firebaseAuth.currentUser == null) {
+                    val uid = firebaseAuth.uid
+                    val hashMap: HashMap<String, Any?> = HashMap()
+                    hashMap["uid"] = uid
+                    hashMap["email"] = email
+                    hashMap["password"] = password
+                    hashMap["userType"] = "user"
 
-                //set data to db
-                val ref = FirebaseDatabase.getInstance().getReference("Users")
-                ref.child(uid!!)
-                    .setValue(hashMap)
-                    .addOnSuccessListener {
-//                        startActivity(Intent(this@Login, DashboardUserActivity::class.java))
-//                        finish()
-                    }
-                    .addOnFailureListener{e->
+                    //set data to db
+                    val ref = FirebaseDatabase.getInstance().getReference("Users")
+                    ref.child(uid!!)
+                        .setValue(hashMap)
+                        .addOnSuccessListener {
 
-                    }
-
+                        }
+                        .addOnFailureListener { e ->
+                            LoginManager.getInstance().logOut()
+                        }
+                }
 
             }
+
 
             override fun onCancel() {
 
@@ -137,12 +137,15 @@ class Login : AppCompatActivity() {
         val credential = FacebookAuthProvider.getCredential(accessToken!!.token)
         firebaseAuth!!.signInWithCredential(credential)
             .addOnFailureListener{ e->
+                Toast.makeText(this, "Cannot login" ,Toast.LENGTH_SHORT).show()
                 Toast.makeText(this, e.message,Toast.LENGTH_SHORT).show()
             }
             .addOnSuccessListener { result ->
                 val email = result.user!!.email
                 val user = firebaseAuth.currentUser
                 Toast.makeText(this, "You logged in with email: " + email,Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this@Login, DashboardUserActivity::class.java))
+                finish()
 
             }
     }
@@ -172,8 +175,6 @@ class Login : AppCompatActivity() {
 
         }
     }
-
-
 
 
     private fun validateData(){
@@ -220,6 +221,8 @@ class Login : AppCompatActivity() {
                 Toast.makeText(this, "Login failed due to ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
+
+
 
     private fun checkUser() {
         //if user is already logged in, redirect to profile activity
