@@ -2,7 +2,9 @@ package com.mobdeve.jardiniano.see
 
 import android.Manifest
 import android.app.ProgressDialog
+import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.TextUtils
@@ -27,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.mobdeve.jardiniano.see.databinding.ActivityLoginBinding
+import java.lang.Exception
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
@@ -79,7 +82,21 @@ class Login : AppCompatActivity() {
 
         }
 
-
+        fun printKeyHash() {
+            try {
+                val info: PackageInfo = this.packageManager.getPackageInfo(this.packageName, PackageManager.GET_SIGNATURES)
+                for (signature in info.signatures) {
+                    val md: MessageDigest = MessageDigest.getInstance("SHA")
+                    md.update(signature.toByteArray())
+                    val hashKeys = String(Base64.encode(md.digest(), 0))
+                    Log.d(TAG, "printHashKey() Hash Key: $hashKeys")
+                }
+            } catch (e: NoSuchAlgorithmException) {
+                Log.d(TAG, "printHashKey()", e)
+            } catch (e: Exception) {
+                Log.d(TAG, "printHashKey()", e)
+            }
+        }
 
         //handle click, open reg
         binding.logreg.setOnClickListener{
