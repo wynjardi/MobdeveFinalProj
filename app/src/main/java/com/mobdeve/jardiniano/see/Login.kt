@@ -98,26 +98,6 @@ class Login : AppCompatActivity() {
 
                 handleFacebookAccessToken(result!!.accessToken)
 
-
-                    val uid = firebaseAuth.uid
-                    val hashMap: HashMap<String, Any?> = HashMap()
-                    hashMap["uid"] = uid
-                    hashMap["email"] = email
-                    hashMap["password"] = password
-                    hashMap["userType"] = "user"
-
-                    //set data to db
-                    val ref = FirebaseDatabase.getInstance().getReference("Users")
-                    ref.child(uid!!)
-                        .setValue(hashMap)
-                        .addOnSuccessListener {
-
-                        }
-                        .addOnFailureListener { e ->
-                            LoginManager.getInstance().logOut()
-                        }
-
-
             }
 
 
@@ -144,6 +124,25 @@ class Login : AppCompatActivity() {
                 val email = result.user!!.email
                 val user = firebaseAuth.currentUser
                 Toast.makeText(this, "You logged in with email: " + email,Toast.LENGTH_SHORT).show()
+                if(firebaseAuth.currentUser != null) {
+                    val uid = firebaseAuth.uid
+                    val hashMap: HashMap<String, Any?> = HashMap()
+                    hashMap["uid"] = uid
+                    hashMap["email"] = email
+                    hashMap["password"] = password
+                    hashMap["userType"] = "user"
+
+                    //set data to db
+                    val ref = FirebaseDatabase.getInstance().getReference("Users")
+                    ref.child(uid!!)
+                        .setValue(hashMap)
+                        .addOnSuccessListener {
+
+                        }
+                        .addOnFailureListener { e ->
+                            LoginManager.getInstance().logOut()
+                        }
+                }
                 startActivity(Intent(this@Login, DashboardUserActivity::class.java))
                 finish()
 
