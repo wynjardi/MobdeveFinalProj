@@ -2,9 +2,7 @@ package com.mobdeve.jardiniano.see
 
 import android.Manifest
 import android.app.ProgressDialog
-import android.content.ContentValues.TAG
 import android.content.Intent
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.TextUtils
@@ -29,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.mobdeve.jardiniano.see.databinding.ActivityLoginBinding
-import java.lang.Exception
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
@@ -78,25 +75,9 @@ class Login : AppCompatActivity() {
         binding!!.fbBtn.setReadPermissions("email")
         binding!!.fbBtn.setOnClickListener {
             signIn()
-            validateData()
-
         }
 
-        fun printKeyHash() {
-            try {
-                val info: PackageInfo = this.packageManager.getPackageInfo(this.packageName, PackageManager.GET_SIGNATURES)
-                for (signature in info.signatures) {
-                    val md: MessageDigest = MessageDigest.getInstance("SHA")
-                    md.update(signature.toByteArray())
-                    val hashKeys = String(Base64.encode(md.digest(), 0))
-                    Log.d(TAG, "printHashKey() Hash Key: $hashKeys")
-                }
-            } catch (e: NoSuchAlgorithmException) {
-                Log.d(TAG, "printHashKey()", e)
-            } catch (e: Exception) {
-                Log.d(TAG, "printHashKey()", e)
-            }
-        }
+
 
         //handle click, open reg
         binding.logreg.setOnClickListener{
@@ -117,25 +98,24 @@ class Login : AppCompatActivity() {
 
                 handleFacebookAccessToken(result!!.accessToken)
 
-                //to store fb user's email uid and usertype
-                val uid = firebaseAuth.uid
-                val hashMap: HashMap<String, Any?> = HashMap()
-                hashMap["uid"] = uid
-                hashMap["email"] = email
-                hashMap["password"] = password
-                hashMap["userType"] = "user"
-
-                //set data to db
-                val ref = FirebaseDatabase.getInstance().getReference("Users")
-                ref.child(uid!!)
-                    .setValue(hashMap)
-                    .addOnSuccessListener {
-                        startActivity(Intent(this@Login, DashboardUserActivity::class.java))
-                        finish()
-                    }
-                    .addOnFailureListener{e->
-
-                    }
+//                val uid = firebaseAuth.uid
+//                val hashMap: HashMap<String, Any?> = HashMap()
+//                hashMap["uid"] = uid
+//                hashMap["email"] = email
+//                hashMap["password"] = password
+//                hashMap["userType"] = "user"
+//
+//                //set data to db
+//                val ref = FirebaseDatabase.getInstance().getReference("Users")
+//                ref.child(uid!!)
+//                    .setValue(hashMap)
+//                    .addOnSuccessListener {
+//                        startActivity(Intent(this@Login, DashboardUserActivity::class.java))
+//                        finish()
+//                    }
+//                    .addOnFailureListener{e->
+//
+//                    }
 
 
             }

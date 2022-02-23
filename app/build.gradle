@@ -77,8 +77,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     implementation 'com.facebook.android:facebook-android-sdk:4.29.0'
-    implementation 'com.facebook.android:facebook-login:[8.1)'
-    implementation 'com.google.firebase:firebase-core:16.0.3'
+
 
     // Material Design Bottom Bar
     implementation 'com.google.android.material:material:1.2.0-alpha02'
